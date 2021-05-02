@@ -65,7 +65,7 @@ def run():
             while RUNNING:
                 camera.wait_recording()
                 dt = time.time()
-                print("Streaming running for {:2}s\r".format(dt - start), end="")
+                print("Streaming running for {:.2f}s\r".format(dt - start), end="")
         except:
             print("\n[-] Error occured")
         finally:
