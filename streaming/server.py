@@ -37,10 +37,8 @@ class StreamBroadcaster:
 
     def write(self, s):
         if self.running:
-             self.vlc.stdin.write(self.buffer)
-    def flush(self):
-        if self.running:
-            self.vlc.stdin.flush()
+             self.vlc.stdin.write(s.encode())
+             self.vlc.communicate()
 
     def close(self):
         if self.running:
@@ -56,7 +54,7 @@ def run():
     with PiCamera() as camera:
         print("[+] Opening Camera")
         stream = StreamBroadcaster()
-        camera.start_recording(stream, format="h264")
+        camera.start_recording(stream.vlc, format="h264")
         stream.start()
         print("[+] Start recording")
         try:
