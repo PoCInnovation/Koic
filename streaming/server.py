@@ -11,16 +11,6 @@ RUNNING = True
 def safe_exit(signum, frame):
     sys.exit(0)
 
-class CustomOutput:
-    def __init__(self):
-        self.content = b""
-
-    def write(self, s):
-        self.content += s
-    
-    def flush(self):
-        print(self.content)
-
 class StreamBroadcaster:
     PORT = 1425
     VLC_ARGS = [
@@ -70,12 +60,11 @@ def run():
         print("[+] Opening Camera")
         stream = StreamBroadcaster()
         camera.start_recording(stream, format="h264")
-        time.sleep(2)
         stream.start()
         print("[+] Start recording")
         try:
             while RUNNING:
-                camera.wait_recording(1)
+                camera.wait_recording()
                 stream.flush()
                 dt += 1
                 print("Streaming running for {} seconds\r".format(dt), end="")
