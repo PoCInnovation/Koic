@@ -1,7 +1,7 @@
 import sys
 import time
 import socket
-improt signal
+import signal
 import subprocess
 from io import BytesIO
 from picamera import PiCamera
