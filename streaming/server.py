@@ -55,6 +55,7 @@ def run():
     print("------------------------------------")
     print("  KoiC - Pi Camera Streaming v0.1   ")
     print("---------- PoC Innovation ----------\n")
+    dt = 0
 
     with PiCamera() as camera:
         print("[+] Opening Camera")
@@ -66,7 +67,12 @@ def run():
             while RUNNING:
                 camera.wait_recording(1)
                 stream.flush()
+                dt += 1
+                print("Streaming running for {} seconds\r".format(dt), end="")
+        except:
+            print("\n[-] Error occured")
         finally:
+            print("\n")
             camera.stop_recording()
             stream.close()
 
