@@ -55,7 +55,7 @@ def run():
         print("[+] Opening Camera")
         stream = StreamBroadcaster()
         stream.start()
-        camera.start_preview()
+        # camera.start_preview()
         camera.start_recording(stream.vlc.stdin, format="h264")
         print("[+] Start recording")
         try:
@@ -70,7 +70,7 @@ def run():
             print("\n")
             try:
                 camera.stop_recording()
-                camera.stop_preview()
+                # camera.stop_preview()
             except BrokenPipeError:
                 pass
             # stream.close()
