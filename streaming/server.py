@@ -11,7 +11,7 @@ VLC_ARGS = [
     "-vvv",
     "stream:///dev/stdin",
     "--sout",
-    "'#rtp{sdp=rtsp://:{}/}'".format(PORT),
+    "'#rtp{{sdp=rtsp://:{}/}}'".format(PORT),
     ":demux=h264"
 ]
 
