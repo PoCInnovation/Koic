@@ -19,7 +19,6 @@ class StreamBroadcaster:
         "stream:///dev/stdin",
         "--sout",
         "#rtp{{sdp=rtsp://:{}/}}".format(PORT),
-        "",
         ":demux=h264"
     ]
 
@@ -28,8 +27,8 @@ class StreamBroadcaster:
         self.running = False
     
     def start(self):
-        self.running = True
         self.vlc = subprocess.Popen(StreamBroadcaster.VLC_ARGS, stdin=subprocess.PIPE)
+        self.running = True
         print("[+] VLC Subprocess launched - streaming on rtsp://{}:{}/".format(
                 socket.gethostbyname(socket.gethostname()),
                 StreamBroadcaster.PORT
@@ -55,9 +54,9 @@ def run():
     with PiCamera() as camera:
         print("[+] Opening Camera")
         stream = StreamBroadcaster()
-        stream.start()
-        # camera.start_preview()
+        camera.start_preview()
         camera.start_recording(stream.vlc.stdin, format="h264")
+        stream.start()
         print("[+] Start recording")
         try:
             start = time.time()
