@@ -73,7 +73,10 @@ def run():
             print("\n[-] Error occured")
         finally:
             print("\n")
-            camera.stop_recording()
+            try:
+                camera.stop_recording()
+            except BrokenPipeError:
+                pass
             stream.close()
 
 if __name__ == "__main__":
