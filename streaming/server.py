@@ -57,14 +57,15 @@ def run():
         print("[+] Opening Camera")
         stream = StreamBroadcaster()
         stream.start()
-
         camera.start_recording(stream, format="h264")
         print("[+] Start recording")
+
         try:
+            start = time.time()
             while RUNNING:
                 camera.wait_recording()
-                dt += 1
-                print("Streaming running for {} seconds\r".format(dt), end="")
+                dt = time.time()
+                print("Streaming running for {:2}s\r".format(dt - start), end="")
         except:
             print("\n[-] Error occured")
         finally:
