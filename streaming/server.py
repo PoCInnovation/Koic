@@ -51,20 +51,25 @@ class StreamBroadcaster:
     def close(self):
         self.vlc.terminate()
 
-print("------------------------------------")
-print("  KoiC - Pi Camera Streaming v0.1   ")
-print("---------- PoC Innovation ----------\n")
+def run():
+    print("------------------------------------")
+    print("  KoiC - Pi Camera Streaming v0.1   ")
+    print("---------- PoC Innovation ----------\n")
 
-with PiCamera() as camera:
-    print("[+] Opening Camera")
-    stream = StreamBroadcaster()
-    camera.start_recording(stream, format="h264")
-    time.sleep(2)
-    print("[+] Start recording")
-    try:
-        while RUNNING:
-            camera.wait_recording(1)
-            stream.flush()
-    finally:
-        camera.stop_recording()
-        stream.close()
+    with PiCamera() as camera:
+        print("[+] Opening Camera")
+        stream = StreamBroadcaster()
+        camera.start_recording(stream, format="h264")
+        time.sleep(2)
+        print("[+] Start recording")
+        try:
+            while RUNNING:
+                camera.wait_recording(1)
+                stream.flush()
+        finally:
+            camera.stop_recording()
+            stream.close()
+
+if __name__ == "__main__":
+    signal.signal(signal.SIGINT, safe_exit)
+    run()
