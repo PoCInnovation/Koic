@@ -40,7 +40,7 @@ class StreamBroadcaster:
         self.buffer += s
 
     def flush(self):
-        self.vlc.stdin += self.buffer
+        self.vlc.stdin.write(self.buffer)
         self.buffer = b""
 
     def close(self):
