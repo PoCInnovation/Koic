@@ -70,9 +70,9 @@ def run():
             print("\n")
             try:
                 camera.stop_recording()
-                # camera.stop_preview()
             except BrokenPipeError:
                 pass
+            camera.stop_preview()
             stream.close()
 
 # raspivid -o - -t 0 -hf -fps 24 | cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:9160/}' :demux=h264
