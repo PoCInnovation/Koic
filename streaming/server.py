@@ -73,7 +73,7 @@ def run():
                 # camera.stop_preview()
             except BrokenPipeError:
                 pass
-            # stream.close()
+            stream.close()
 
 
 if __name__ == "__main__":
