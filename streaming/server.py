@@ -3,6 +3,17 @@ import subprocess
 from io import BytesIO
 from picamera import PiCamera
 
+
+class CustomOutput:
+    def __init__(self):
+        self.content = b""
+
+    def write(self, s):
+        self.content += s
+    
+    def flush(self):
+        print(self.content)
+
 PORT = 1425
 
 # raspivid -o - -t 0 -n => Opening camera and starting recoding information
@@ -26,5 +37,6 @@ with PiCamera() as camera:
     
     # print("[+] VLC broadcasting video on port {}".format(PORT))
     # camera.start_recording(vlcBroadcaster.stdin)
-    camera.start_recording(sys.stdout)
-
+    camera.start_recording(CustomOutput(), format="h264")
+    camera.wait_recording(15)
+    camera.stop_recording()
