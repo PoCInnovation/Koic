@@ -33,8 +33,13 @@ class StreamBroadcaster:
     ]
 
     def __init__(self):
-        self.vlc = subprocess.Popen(StreamBroadcaster.VLC_ARGS, stdin=subprocess.PIPE)
+        self.vlc = None
+        self.running = False
         self.buffer = b""
+    
+    def start(self):
+        self.running = True
+        self.vlc = subprocess.Popen(StreamBroadcaster.VLC_ARGS, stdin=subprocess.PIPE)
         print("[+] VLC Subprocess launched - streaming on rtsp://{}:{}/".format(
                 socket.gethostbyname(socket.gethostname()),
                 StreamBroadcaster.PORT
@@ -42,14 +47,18 @@ class StreamBroadcaster:
         )
 
     def write(self, s):
-        self.buffer += s
+        if self.running:
+            self.buffer += s
 
     def flush(self):
-        self.vlc.stdin.write(self.buffer)
-        self.buffer = b""
+        if self.running:
+            self.vlc.stdin.write(self.buffer)
+            self.buffer = b""
 
     def close(self):
-        self.vlc.terminate()
+        if self.running:
+            self.vlc.terminate()
+            self.running = False
 
 def run():
     print("------------------------------------")
@@ -62,6 +71,7 @@ def run():
         stream = StreamBroadcaster()
         camera.start_recording(stream, format="h264")
         time.sleep(2)
+        stream.start()
         print("[+] Start recording")
         try:
             while RUNNING:
