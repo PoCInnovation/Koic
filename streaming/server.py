@@ -18,7 +18,7 @@ class StreamBroadcaster:
         "-vvv",
         "stream:///dev/stdin",
         "--sout",
-        "#rtp{{sdp=rtsp://:{}/}}".format(PORT),
+        "#rtp{{sdp=rtsp://:{}/out.h264}}".format(PORT),
         ":demux=h264"
     ]
 
