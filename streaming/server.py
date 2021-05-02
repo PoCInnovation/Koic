@@ -28,11 +28,11 @@ class StreamBroadcaster:
     ]
 
     def __init__(self):
-        self.vlc = subprocess.Popen(StreamBoardcaster.VLC_ARGS, stdin=subprocess.PIPE)
+        self.vlc = subprocess.Popen(StreamBroadcaster.VLC_ARGS, stdin=subprocess.PIPE)
         self.buffer = b""
         print("[+] VLC Subprocess launched - streaming on rtsp://{}:{}/".format(
                 socket.gethostbyname(socket.gethostname()),
-                StreamBoardcaster.PORT
+                StreamBroadcaster.PORT
             )
         )
 
