@@ -9,7 +9,7 @@ from picamera import PiCamera
 RUNNING = True
 
 def safe_exit(signum, frame):
-    RUNNING = False
+    sys.exit(0)
 
 class CustomOutput:
     def __init__(self):
