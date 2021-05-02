@@ -3,7 +3,7 @@ import time
 import socket
 import subprocess
 from io import BytesIO
-from picamera import picamera
+from picamera import PiCamera
 
 
 class CustomOutput:
