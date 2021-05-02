@@ -18,7 +18,8 @@ class StreamBroadcaster:
         "-vvv",
         "stream:///dev/stdin",
         "--sout",
-        "'#rtp{{sdp=rtsp://:{}/}}'".format(PORT),
+        "#rtp{{sdp=rtsp://:{}/}}".format(PORT),
+        "",
         ":demux=h264"
     ]
 
@@ -75,6 +76,7 @@ def run():
                 pass
             stream.close()
 
+# raspivid -o - -t 0 -hf -fps 24 | cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:9160/}' :demux=h264
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, safe_exit)
