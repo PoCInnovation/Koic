@@ -57,9 +57,9 @@ def run():
         print("[+] Opening Camera")
         stream = StreamBroadcaster()
         stream.start()
+        camera.start_preview()
         camera.start_recording(stream, format="h264")
         print("[+] Start recording")
-
         try:
             start = time.time()
             while RUNNING:
@@ -72,9 +72,11 @@ def run():
             print("\n")
             try:
                 camera.stop_recording()
+                camera.stop_preview()
             except BrokenPipeError:
                 pass
             stream.close()
+
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, safe_exit)
