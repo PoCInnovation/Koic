@@ -25,7 +25,6 @@ class StreamBroadcaster:
     def __init__(self):
         self.vlc = None
         self.running = False
-        self.buffer = b""
     
     def start(self):
         self.running = True
@@ -38,12 +37,10 @@ class StreamBroadcaster:
 
     def write(self, s):
         if self.running:
-            self.buffer += s
-
+             self.vlc.stdin.write(self.buffer)
     def flush(self):
         if self.running:
-            self.vlc.stdin.write(self.buffer)
-            self.buffer = b""
+            self.vlc.stdin.flush()
 
     def close(self):
         if self.running:
