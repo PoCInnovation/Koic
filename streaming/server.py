@@ -55,10 +55,10 @@ def run():
 
     with PiCamera() as camera:
         print("[+] Opening Camera")
-        stream = StreamBroadcaster()
-        stream.start()
+        # stream = StreamBroadcaster()
+        # stream.start()
         camera.start_preview()
-        camera.start_recording(stream, format="h264")
+        camera.start_recording("media.h264", format="h264")
         print("[+] Start recording")
         try:
             start = time.time()
@@ -75,7 +75,7 @@ def run():
                 camera.stop_preview()
             except BrokenPipeError:
                 pass
-            stream.close()
+            # stream.close()
 
 
 if __name__ == "__main__":
