@@ -1,10 +1,15 @@
 import sys
 import time
 import socket
+improt signal
 import subprocess
 from io import BytesIO
 from picamera import PiCamera
 
+RUNNING = True
+
+def safe_exit(signum, frame):
+    RUNNING = False
 
 class CustomOutput:
     def __init__(self):
@@ -46,29 +51,18 @@ class StreamBroadcaster:
     def close(self):
         self.vlc.terminate()
 
-
-
-# raspivid -o - -t 0 -n => Opening camera and starting recoding information
-
-
-
 print("------------------------------------")
 print("  KoiC - Pi Camera Streaming v0.1   ")
 print("---------- PoC Innovation ----------\n")
 
 with PiCamera() as camera:
     print("[+] Opening Camera")
-    # vlcBroadcaster = subprocess.Popen(VLC_ARGS, stdin=subprocess.PIPE)
-    # print("[+] Open subprocess to broadcast video")
-    
-    # print("[+] VLC broadcasting video on port {}".format(PORT))
-    # camera.start_recording(vlcBroadcaster.stdin)
     stream = StreamBroadcaster()
     camera.start_recording(stream, format="h264")
     time.sleep(2)
     print("[+] Start recording")
     try:
-        while True:
+        while RUNNING:
             camera.wait_recording(1)
             stream.flush()
     finally:
