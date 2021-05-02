@@ -39,7 +39,7 @@ class StreamBroadcaster:
     def write(self, s):
         if self.running:
             if not s is None:
-                self.vlc.stdin.write(s.encode())
+                self.vlc.stdin.write(s)
                 self.vlc.communicate()
 
     def close(self):
