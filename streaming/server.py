@@ -38,5 +38,10 @@ with PiCamera() as camera:
     # print("[+] VLC broadcasting video on port {}".format(PORT))
     # camera.start_recording(vlcBroadcaster.stdin)
     camera.start_recording(CustomOutput(), format="h264")
-    camera.wait_recording(15)
+    try:
+        while True:
+            camera.wait_recording(1)
+    finally:
+        camera.stop_recording()
+
     camera.stop_recording()
