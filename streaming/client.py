@@ -5,10 +5,12 @@ import sys
 import os
 
 IP = "192.168.1.26"
-PORT = 9160
+PORT = 1425
 
+# This environnement variable allows to receive stream from UPD datagram
 os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
 
+# OpenCV provides a way to connect easily to RTSP stream
 client = cv2.VideoCapture("rtsp://{}:{}/out.h264".format(IP, PORT))
 
 if not client.isOpened():

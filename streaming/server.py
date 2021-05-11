@@ -11,8 +11,19 @@ RUNNING = True
 def safe_exit(signum, frame):
     sys.exit(0)
 
+
+# StrramBroadcaster
+#
+# Streambroadcaster role is to create a pipe between
+# camera frames sent and VLC subprocess allowing to
+# the RTSP streaming
+
 class StreamBroadcaster:
     PORT = 1425
+    # VLC_ARGS description
+    # @arg -vvv stream:///dev/stdin: setting data input to stdin
+    # @arg --sout #rtp... : enable VLC custom configuration
+    # @arg :demux=h264 : setting output to be encoded with H264 Codec
     VLC_ARGS = [
         "cvlc",
         "-vvv",
@@ -25,8 +36,10 @@ class StreamBroadcaster:
     def __init__(self):
         self.vlc = None
         self.running = False
-    
+
     def start(self):
+        # Subprocess creation
+        # PIPE mode to send data as we want to stdin of the subprocess
         self.vlc = subprocess.Popen(StreamBroadcaster.VLC_ARGS, stdin=subprocess.PIPE)
         self.running = True
         print("[+] VLC Subprocess launched - streaming on rtsp://{}:{}/".format(
@@ -55,6 +68,7 @@ def run():
         print("[+] Opening Camera")
         stream = StreamBroadcaster()
         camera.start_preview()
+        # Start recording video stream
         camera.start_recording(stream, format="h264")
         stream.start()
         print("[+] Start recording")
