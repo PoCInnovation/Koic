@@ -66,6 +66,8 @@ def run():
 
     with PiCamera() as camera:
         print("[+] Opening Camera")
+        camera.framerate = 5
+        camera.resolution = (640, 480)        
         stream = StreamBroadcaster()
         camera.start_preview()
         # Start recording video stream
@@ -89,7 +91,7 @@ def run():
             camera.stop_preview()
             stream.close()
 
-# raspivid -o - -t 0 -hf -fps 24 | cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:9160/}' :demux=h264
+# raspivid -o - -t 0 -hf -fps 5 | cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:9160/}' :demux=h264
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, safe_exit)
