@@ -42,8 +42,12 @@ class Server:
 
     def write(self, b):
         self.lock.acquire()
-        for client in self.clients:
-            client.write(b)
+        for i in range(len(self.clients)):
+            try:
+                self.clients[i].write(b)
+            except BrokenPipeError:
+                self.clients[i].close()
+                self.clients.pop(i)
         self.lock.release()
 
     def __del__(self):
