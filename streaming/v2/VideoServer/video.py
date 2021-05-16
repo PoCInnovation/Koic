@@ -65,4 +65,4 @@ if __name__ == '__main__':
             "---------------------\n")
     vidServer = VideoServer(sys.argv[1], int(sys.argv[2]))
     vidServer.start_broadcast()
-    vidServer.start_capture()
+    # vidServer.start_capture()
