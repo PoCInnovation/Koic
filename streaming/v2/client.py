@@ -78,11 +78,14 @@ try:
                 frame = frame[:,:w,:]
                 # RGB TO BGR conversion
                 frame = frame[...,::-1]
+                # Predict bounded boxes on frame
+                result = detector.predict(frame)
                 # Show with cv2.imshow()
-                detector.predict(frame)
-                cv2.imshow('FRAME', frame)
+                cv2.imshow('Stream', result)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     running = False
+except KeyboardInterrupt:
+    pass
 finally:
     co.close()
     client.close()
