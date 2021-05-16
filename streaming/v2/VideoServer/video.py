@@ -30,7 +30,7 @@ class VideoServer:
             print("[-] Capture already running")
             return
         self.running_capture = True
-        # self.camera.start_preview()
+        self.camera.start_preview()
         time.sleep(2)
         start = time.time()
         self.camera.start_recording(self.server, format="h264")
@@ -49,13 +49,12 @@ class VideoServer:
             print("[+] Stopping video capture")
             self.running_capture = False
             self.camera.stop_recording()
-            # self.camera.stop_preview()
+            self.camera.stop_preview()
 
     def __del__(self):
         self.stop_capture()
         self.server.stop()
         sys.exit(1)
-        # self.start_thd.join()
 
 
 if __name__ == '__main__':
