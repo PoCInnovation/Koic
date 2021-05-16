@@ -46,7 +46,6 @@ class Server:
             try:
                 self.clients[i].write(b)
             except BrokenPipeError:
-                self.clients[i].close()
                 self.clients.pop(i)
         self.lock.release()
 
