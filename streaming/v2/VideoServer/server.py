@@ -45,7 +45,7 @@ class Server:
         for i in range(len(self.clients)):
             try:
                 self.clients[i].write(b)
-            except BrokenPipeError:
+            except (BrokenPipeError, ConnectionAbortedError, ConnectionResetError):
                 self.clients.pop(i)
         self.lock.release()
 
