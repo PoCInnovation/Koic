@@ -40,6 +40,7 @@ class VideoServer:
                 dt = time.time()
                 print("Streaming running for {:.2f}s\r".format(dt - start), end="")
             except KeyboardInterrupt:
+                self.server.stop()
                 self.stop_capture()
                 break
 
@@ -53,7 +54,6 @@ class VideoServer:
     def __del__(self):
         self.stop_capture()
         self.server.stop()
-        self.start_thd._stop()
         self.start_thd.join()
 
 
