@@ -52,7 +52,7 @@ class VideoServer:
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         print("USAGE:\t{} host port".format(sys.argv[0]))
         sys.exit(1)
     print(  "KoiC Stream Server v2\n"
