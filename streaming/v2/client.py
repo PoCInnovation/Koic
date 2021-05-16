@@ -31,6 +31,7 @@ import h264decoder
 import numpy as np
 import cv2
 import matplotlib.pyplot as pyplot
+from detector import Detector
 
 # class VideoReceiver:
 
@@ -50,6 +51,8 @@ import matplotlib.pyplot as pyplot
 
 WIDTH = 640
 HEIGHT = 480
+
+detector = Detector("yolov5s")
 
 client = socket.socket()
 client.connect(('192.168.1.5', 1245))
@@ -76,6 +79,7 @@ try:
                 # RGB TO BGR conversion
                 frame = frame[...,::-1]
                 # Show with cv2.imshow()
+                detector.predict(frame)
                 cv2.imshow('FRAME', frame)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     running = False
