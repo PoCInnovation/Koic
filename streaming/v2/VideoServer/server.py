@@ -19,7 +19,7 @@ class Server:
 
             print("[+] Server Listening on: {}:{}".format(self.host[0], self.host[1]))
             while self.running:
-                client = self._serv.accept()
+                client = self._serv.accept()[0].makefile('wb')
                 print("[+] New client connected")
                 self.lock.acquire()
                 self.clients.append(client)
