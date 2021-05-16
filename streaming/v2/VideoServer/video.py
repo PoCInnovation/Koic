@@ -12,8 +12,8 @@ class VideoServer:
         self.running_capture = False
         self.start_thd: Thread = None
 
-        camera.resolution = (640, 480)
-        camera.framerate = 24
+        self.camera.resolution = (640, 480)
+        self.camera.framerate = 24
 
     def start_broadcast(self):
         print("[+] Starting server in background")
@@ -24,6 +24,9 @@ class VideoServer:
         print("[+] Start video capture to stream")
         if not self.server.isRunning():
             print("[-] Server not running: start it before capturing")
+            return
+        if self.running_capture is True:
+            print("[-] Capture already running")
             return
         self.running_capture = True
         self.camera.start_preview()
@@ -39,10 +42,11 @@ class VideoServer:
                 self.stop_capture()
 
     def stop_capture(self):
-        print("[+] Stopping video capture")
-        self.running_capture = False
-        self.camera.stop_recording()
-        self.camera.stop_preview()
+        if self.running_capture is False:
+            print("[+] Stopping video capture")
+            self.running_capture = False
+            self.camera.stop_recording()
+            self.camera.stop_preview()
 
     def __del__(self):
         self.stop_capture()
