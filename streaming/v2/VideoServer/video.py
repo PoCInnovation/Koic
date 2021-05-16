@@ -43,7 +43,7 @@ class VideoServer:
                 self.stop_capture()
 
     def stop_capture(self):
-        if self.running_capture is False:
+        if self.running_capture is True:
             print("[+] Stopping video capture")
             self.running_capture = False
             self.camera.stop_recording()
