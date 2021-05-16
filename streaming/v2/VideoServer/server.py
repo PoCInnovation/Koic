@@ -25,8 +25,8 @@ class Server:
                 self.clients.append(client)
                 self.lock.release()
 
-        except Exception as e:
-            print("[-] {}".format(e))
+        except:
+            print("[-] Interruption")
             self.stop()
 
     def isRunning(self):

@@ -19,6 +19,7 @@ class VideoServer:
         print("[+] Starting server in background")
         self.start_thd = Thread(target=self.server.start, args=())
         self.start_thd.start()
+        time.sleep(2)
 
     def start_capture(self):
         print("[+] Start video capture to stream")
