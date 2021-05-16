@@ -1,4 +1,4 @@
-from streaming.v2.VideoServer.server import Server
+from server import Server
 from threading import Thread, Lock
 from picamera import PiCamera
 import time
