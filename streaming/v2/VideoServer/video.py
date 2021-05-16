@@ -53,9 +53,10 @@ class VideoServer:
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
+        print("USAGE:\t{} host port".format(sys.argv[0]))
         sys.exit(1)
     print(  "KoiC Stream Server v2\n"
             "---------------------\n")
-    vidServer = VideoServer("", 1245)
+    vidServer = VideoServer(sys.argv[1], int(sys.argv[2]))
     vidServer.start_broadcast()
     vidServer.start_capture()
