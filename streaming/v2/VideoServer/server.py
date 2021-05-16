@@ -7,14 +7,14 @@ class Server:
     def __init__(self, host, port):
         self._serv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.host = (host, port)
+        self._serv.bind(self.host)
+        self._serv.listen(Server.MAX_SIMULTANEOUS_CLIENTS)
         self.running = False
         self.clients = []
         self.lock = Lock()
 
     def start(self):
         try:
-            self._serv.bind(self.host)
-            self._serv.listen(Server.MAX_SIMULTANEOUS_CLIENTS)
             self.running = True
 
             print("[+] Server Listening on: {}:{}".format(self.host[0], self.host[1]))
