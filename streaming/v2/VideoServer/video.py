@@ -41,6 +41,7 @@ class VideoServer:
                 print("Streaming running for {:.2f}s\r".format(dt - start), end="")
             except KeyboardInterrupt:
                 self.stop_capture()
+                break;
 
     def stop_capture(self):
         if self.running_capture is True:
