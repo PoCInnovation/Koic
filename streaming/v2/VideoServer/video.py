@@ -53,6 +53,7 @@ class VideoServer:
     def __del__(self):
         self.stop_capture()
         self.server.stop()
+        self.start_thd._stop()
         self.start_thd.join()
 
 

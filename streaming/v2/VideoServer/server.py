@@ -33,10 +33,12 @@ class Server:
         return self.running
 
     def stop(self):
+        self.lock.acquire()
         self.running = False
         for client in self.clients:
             client.close()
         self._serv.close()
+        self.lock.release()
 
     def write(self, b):
         self.lock.acquire()
