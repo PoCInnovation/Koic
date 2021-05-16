@@ -2,6 +2,7 @@ from streaming.v2.VideoServer.server import Server
 from threading import Thread, Lock
 from picamera import PiCamera
 import time
+import sys
 
 class VideoServer:
 
@@ -48,3 +49,13 @@ class VideoServer:
         self.server.stop()
         if not self.start_thd is None and self.start_thd.isAlive():
             self.start_thd.join()
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        sys.exit(1)
+    print(  "KoiC Stream Server v2\n"
+            "---------------------\n")
+    vidServer = VideoServer("", 1245)
+    vidServer.start_broadcast()
+    vidServer.start_capture()
