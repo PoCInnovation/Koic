@@ -5,7 +5,7 @@ class Detector:
     FONT = cv2.FONT_HERSHEY_SIMPLEX
     SCALE = 1
     COLOR = (255, 255, 255)
-    THICKNESS = 2
+    THICKNESS = 4
 
     def __init__(self, model_name):
         self.model = torch.hub.load('ultralytics/yolov5', model_name)
@@ -26,7 +26,7 @@ class Detector:
             cv2.putText(
                 frame,
                 'Label: {:.2f}%'.format(confidence * 100),
-                (int(xmin) - 14, int(ymin) - 14),
+                (int(xmin), int(ymin) - 14),
                 Detector.FONT,
                 Detector.SCALE,
                 Detector.THICKNESS
