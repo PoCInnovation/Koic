@@ -55,7 +55,10 @@ HEIGHT = 480
 detector = Detector("yolov5s")
 
 client = socket.socket()
-client.connect(('192.168.1.5', 1245))
+# At home
+# client.connect(('192.168.1.5', 1245))
+# At school
+client.connect(('10.224.33.237', 1245))
 
 co = client.makefile('rb')
 decoder = h264decoder.H264Decoder()
@@ -79,9 +82,9 @@ try:
                 # RGB TO BGR conversion
                 frame = frame[...,::-1]
                 # Predict bounded boxes on frame
-                result = detector.predict(frame)
-                # Show with cv2.imshow()
-                cv2.imshow('Stream', result)
+                frame = detector.get_predicted_boxes(frame)
+                # Show window
+                cv2.imshow('Stream', frame)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     running = False
 except KeyboardInterrupt:
