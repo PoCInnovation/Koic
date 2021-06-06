@@ -1,33 +1,57 @@
-import React ,{Component} from 'react';
-import { StyleSheet, Text, View,Button } from 'react-native';
-import { Video } from 'expo-av';
+import React from 'react';
+import 'react-native-gesture-handler';
+import { StyleSheet, Text, View, Button, StatusBar } from 'react-native';
+import { TabNavigator } from 'react-navigation'
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Stream from './components/Stream'
+import Recap from './components/Recap'
+import About from './components/About'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default class App extends Component {
+// function StreamScreen() {
+//   return (
+//     <View>
+//       <Stream />
+//     </View>
+//   );
+// }
+
+// function RecapScreen() {
+//   return (
+//     <Recap />
+//   );
+// }
+
+// function AboutScreen() {
+//   return (
+//     <About />
+//   );
+// }
+
+const Tab = createBottomTabNavigator();
+
+function NavTab() {
+  return (
+      <View>
+        {/* <Stream /> */}
+        <NavigationContainer >
+          <Tab.Navigator>
+            <Tab.Screen name="Stream" component={Stream} />
+            <Tab.Screen name="Recap" component={Recap} />
+            <Tab.Screen name="About" component={About} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </View>
+  )
+}
+
+export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>KOIC</Text>
-        <Video
-          source={
-            {uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4', }
-          }
-          resizeMode="contain"
-          shouldPlay
-          useNativeControls
-          style={{ width: "100%", height: "50%" }}
-      />
+      <View>
+        <NavTab />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-// export default App;
