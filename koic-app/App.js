@@ -7,34 +7,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Stream from './components/Stream'
 import Recap from './components/Recap'
 import About from './components/About'
-import Ionicons from 'react-native-vector-icons/Ionicons';
-
-// function StreamScreen() {
-//   return (
-//     <View>
-//       <Stream />
-//     </View>
-//   );
-// }
-
-// function RecapScreen() {
-//   return (
-//     <Recap />
-//   );
-// }
-
-// function AboutScreen() {
-//   return (
-//     <About />
-//   );
-// }
 
 const Tab = createBottomTabNavigator();
 
 function NavTab() {
   return (
-      <View>
-        {/* <Stream /> */}
+      <View style={{width: "100%", height: "100pt"}}>
         <NavigationContainer >
           <Tab.Navigator>
             <Tab.Screen name="Stream" component={Stream} />
