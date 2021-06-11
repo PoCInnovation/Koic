@@ -4,10 +4,8 @@ import {View, Text } from 'react-native'
 export default class About extends React.Component {
     render() {
         return (
-            <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor:'#fff', bottom: 0, padding: "5%", display: "fix", color:'red'}}>
-                <Text>
-                    A propos ici.
-                </Text>
+            <View>
+                <Text style={{flex: 1, alignItems: 'center', textAlign: 'center', paddingVertical: 8}}>A propos ici.</Text>
             </View>
         );
     }

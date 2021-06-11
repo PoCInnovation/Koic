@@ -1,16 +1,26 @@
 import React from 'react'
-import {View, Text } from 'react-native'
+import {View, Text, StyleSheet } from 'react-native'
+import Graph from './Graph'
+
+const data = [
+    { label: 'Corbeau', value: 10 },
+    { label: 'Sanglier', value: 2 }, // valeurs temporaires
+  ]
 
 export default class Recap extends React.Component {
     render() {
         return (
-            <View>
-                <Text>
-                    ici on mettra des graphs par exemple qui
-                    font une moyenne de donner comme le nb 
-                    d'animaux par jour.
-                </Text>
+            <View style={style.container}>
+                <Graph data={data} round={1} unit={'animaux'}/>
             </View>
         );
     }
 }
+
+const style = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+    })
