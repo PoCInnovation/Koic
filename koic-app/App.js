@@ -1,14 +1,15 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Button, StatusBar, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Button, StatusBar, Dimensions, Image } from 'react-native';
 import { TabNavigator } from 'react-navigation'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Stream from './components/Stream'
-import Recap from './components/Recap'
+import Activity from './components/Recap'
 import About from './components/About'
 import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Header } from 'react-native-elements';
 
 const wWidth = Dimensions.get('window').width;
 const wHeight = Dimensions.get('window').height;
@@ -16,24 +17,70 @@ const Tab = createBottomTabNavigator();
 
 function NavTab() {
   return (
-      <View style={{width: wWidth, height: wHeight}}>
+      <View style={{width: wWidth, height: wHeight, backgroundColor: '#1b212c'}}>
         <NavigationContainer >
-          <Tab.Navigator 
-          tabBarOptions={{ 
-            showIcon: true 
+          <Tab.Navigator
+            tabBarOptions={{
+              showLabel: false,
+              showIcon: true,
+              style: {
+                position: 'absolute',
+                bottom: 25,
+                left: 20,
+                right: 20,
+                elevation: 0,
+                backgroundColor:'#ffffff',
+                borderRadius: 15,
+                height: 70,
+              }
             }}>
-            <Tab.Screen name="Stream" component={Stream} options={{
+            <Tab.Screen
+              name="Stream"
+              component={Stream}
+              options={{
               tabBarLabel: 'Stream',
-              tabBarIcon: () => <Icon name="camera" color="#333" size={24} />,
-            }} />
-            <Tab.Screen name="Recap" component={Recap} options={{
-              tabBarLabel: 'Recap',
-              tabBarIcon: () => <Icon name="bars" color="#333" size={24} />,
-            }} />
-            <Tab.Screen name="About" component={About} options={{
-              tabBarLabel: 'About',
-              tabBarIcon: () => <Icon name="question" color="#333" size={24} />,
-            }}/>
+              tabBarIcon: ({focused}) => (
+                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+                  <Image
+                    source={require('./icons/stream.png')}
+                    resizeMode="contain"
+                    style={{
+                      width: 25,
+                      height: 25,
+                      tintColor: focused ? '#e32f45' : '#748c94',
+                    }}
+                  />
+                </View>
+               ),
+              }} />
+              <Tab.Screen
+                name="Activity"
+                component={Activity}
+                options={{
+                tabBarLabel: 'Activity',
+                tabBarIcon: ({focused}) => (
+                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+                  <Image
+                    source={require('./icons/graph.png')}
+                    resizeMode="contain"
+                    leftIconContainerStyle={{ margin: 20 }}
+                    style={{
+                      width: 25,
+                      height: 25,
+                      tintColor: focused ? '#e32f45' : '#748c94',
+                    }}
+                  />
+                </View>
+                ),
+              }} />
+              {/* <Tab.Screen name="??" component={About} options={{
+                tabBarLabel: '??',
+                tabBarIcon: () => <Icon name="question" color="#333" size={24} />,
+              }}/>
+              <Tab.Screen name="About" component={About} options={{
+                tabBarLabel: 'About',
+                tabBarIcon: () => <Icon name="question" color="#333" size={24} />,
+              }}/> */}
           </Tab.Navigator>
         </NavigationContainer>
       </View>
@@ -43,9 +90,9 @@ function NavTab() {
 export default class App extends React.Component {
   render() {
     return (
-      <View>
-        <NavTab />
-      </View>
+    <View>
+      <NavTab />
+    </View>
     );
   }
 }
