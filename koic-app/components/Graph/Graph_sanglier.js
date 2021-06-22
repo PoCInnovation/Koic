@@ -14,10 +14,12 @@ export default class Graph_sanglier extends React.Component {
       {x: '20h', y: 4}
     ]
     return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: '#1b212c'}}>
       <PureChart type={'line'}
       data={sampleData}
-      width={'50%'}
-      height={100} />
+      width={'100%'}
+      height={100}/>
+    </View>
     );
   }
 }

@@ -8,7 +8,7 @@ const wHeight = Dimensions.get('window').height;
 export default class Stream extends React.Component {
     render() {
         return (
-            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+            <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: '#1b212c'}}>
             <Video
                 source={
                 {uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4', }

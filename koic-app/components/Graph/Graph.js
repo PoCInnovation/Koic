@@ -27,7 +27,7 @@ export default class Graph_global extends React.Component {
       <PureChart type={'line'}
       data={sampleData}
       width={'100%'}
-      height={100}/>
+      height={'100'}/>
     );
   }
 }

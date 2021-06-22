@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Stream from './components/Stream'
 import Activity from './components/Recap'
+import G_corbeau from './components/Graph/Graph_corbeau'
 import About from './components/About'
 import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -17,7 +18,7 @@ const Tab = createBottomTabNavigator();
 
 function NavTab() {
   return (
-      <View style={{width: wWidth, height: wHeight, backgroundColor: '#1b212c'}}>
+      <View style={{width: wWidth, height: wHeight}}>
         <NavigationContainer >
           <Tab.Navigator
             tabBarOptions={{
@@ -90,7 +91,7 @@ function NavTab() {
 export default class App extends React.Component {
   render() {
     return (
-    <View>
+      <View>
       <NavTab />
     </View>
     );

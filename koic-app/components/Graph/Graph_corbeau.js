@@ -1,5 +1,6 @@
-import React, { Component, View } from 'react'
+import React, { Component } from 'react'
 import PureChart from 'react-native-pure-chart';
+import { StyleSheet, Text, View, Button, StatusBar, Dimensions } from 'react-native';
 
 export default class Graph_corbeau extends React.Component {
   render () {
@@ -11,10 +12,12 @@ export default class Graph_corbeau extends React.Component {
       {x: '20h', y: 10}
     ]
     return (
-        <PureChart type={'line'}
-        data={sampleData}
-        width={'100%'}
-        height={100} />
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: '#1b212c'}}>
+          <PureChart type={'line'}
+          data={sampleData}
+          width={'50%'}
+          height={200} />
+      </View>
     );
   }
 }
