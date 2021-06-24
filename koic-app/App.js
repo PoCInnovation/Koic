@@ -51,7 +51,7 @@ function NavTab() {
                         bottom: '30%',
                         width: 25,
                         height: 25,
-                        tintColor: focused ? '#e32f45' : '#748c94',
+                        tintColor: focused ? '#6c53f8' : 'black',
                       }}
                     />
                   </View>
@@ -72,7 +72,7 @@ function NavTab() {
                       bottom: '30%',
                       width: 25,
                       height: 25,
-                      tintColor: focused ? '#e32f45' : '#748c94',
+                      tintColor: focused ? '#6c53f8' : 'black',
                     }}
                   />
                 </View>
@@ -93,7 +93,7 @@ function NavTab() {
                       bottom: '30%',
                       width: 30,
                       height: 30  ,
-                      tintColor: focused ? '#e32f45' : '#748c94',
+                      tintColor: focused ? '#6c53f8' : 'black',
                     }}
                   />
                 </View>
@@ -114,7 +114,7 @@ function NavTab() {
                       bottom: '30%',
                       width: 25,
                       height: 25,
-                      tintColor: focused ? '#e32f45' : '#748c94',
+                      tintColor: focused ? '#6c53f8' : 'black',
                     }}
                   />
                 </View>

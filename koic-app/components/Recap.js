@@ -28,7 +28,7 @@ function NavTabAcitivty() {
               indicatorStyle: {
                   height: null,
                   top: '15%',
-                  bottom: '10%',
+                  bottom: '20%',
                   width: '45%',
                   left: '2.5%',
                   borderRadius: 100,
@@ -36,7 +36,7 @@ function NavTabAcitivty() {
               style: {
                   alignSelf: "center",
                   width: '50%',
-                  bottom: '83%',
+                  bottom: '80%',
                   borderRadius: 100,
                   backgroundColor: "white",
                   elevation: 5,
@@ -123,6 +123,7 @@ function Header() {
           alignItems: 'center'
         }}>
         <View style={style.headerBar}>
+          <Text style={{fontSize: 25, fontWeight: 'bold', marginRight: '35%', marginLeft: '10%', color: 'white'}}>Acitivity</Text>
         </View>
       </ImageBackground>
     </View>
