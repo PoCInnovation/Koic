@@ -53,7 +53,7 @@ const style = StyleSheet.create({
       paddingHorizontal: '10%',
       borderBottomLeftRadius: 20,
       borderBottomRightRadius: 20,
-      paddingHorizontal: 20
+      paddingHorizontal: 20,
     },
     header: {
       width: '100%',

@@ -41,7 +41,14 @@ function NavTabAcitivty() {
                   backgroundColor: "white",
                   elevation: 5,
                   shadowOpacity: .10,
-                  shadowRadius: 4,
+                  shadowColor: "#000",
+                  shadowOffset: {
+                      width: 0,
+                      height: 2,
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 3.84,
+                  elevation: 5,
               },
               tabStyle: {
                   borderRadius: 100,
@@ -147,7 +154,7 @@ const style = StyleSheet.create({
       paddingHorizontal: '10%',
       borderBottomLeftRadius: 20,
       borderBottomRightRadius: 20,
-      paddingHorizontal: 20
+      paddingHorizontal: 20,
     },
     header: {
       width: '100%',

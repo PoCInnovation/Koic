@@ -98,6 +98,14 @@ const style = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'white',
     margin: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   cardHour: {
     width: '40%',
@@ -110,6 +118,14 @@ const style = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'white',
     margin: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   }
 })
 // let sanglier = [
