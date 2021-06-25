@@ -4,10 +4,10 @@ import { StyleSheet, Text, View, Button, StatusBar, Dimensions, Image } from 're
 import { TabNavigator } from 'react-navigation'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Stream from './components/Stream'
-import Activity from './components/Recap'
-import G_corbeau from './components/Graph/Graph_corbeau'
-import About from './components/About'
+import Stream from './components/screens/Stream'
+import Activity from './components/screens/Recap'
+// import G_corbeau from './components/Graph/Graph_corbeau'
+import About from './components/screens/About'
 import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Header } from 'react-native-elements';

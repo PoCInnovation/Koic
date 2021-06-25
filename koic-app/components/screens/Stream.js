@@ -9,7 +9,7 @@ function Header() {
     return (
       <View style={style.header}>
         <ImageBackground
-          source={require('../icons/banner.png')}
+          source={require('../../icons/banner.png')}
           resizeMode='cover'
           style={{
             flex: 1,

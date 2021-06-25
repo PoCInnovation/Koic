@@ -4,10 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import G_corbeau from './Graph/Graph_corbeau'
-import G_sanglier from './Graph/Graph_sanglier'
+import raven_activity from '../Activity/raven_activity'
+import boar_activity from '../Activity/boar_activity'
 import stream from './Stream'
-import Graph from './Graph/Graph'
+import global_activity from '../Activity/global_activity'
 import { ScrollView } from 'react-native-gesture-handler';
 
 
@@ -56,13 +56,13 @@ function NavTabAcitivty() {
             }}>
           <Tab.Screen
               name="corbeau"
-              component={G_corbeau}
+              component={raven_activity}
               options={{
               tabBarLabel: 'Graph_corbeau',
               tabBarIcon: ({focused}) => (
                 <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
                   <Image
-                    source={require('../icons/raven.png')}
+                    source={require('../../icons/raven.png')}
                     resizeMode="contain"
                     style={{
                       bottom: '30%',
@@ -76,13 +76,13 @@ function NavTabAcitivty() {
               }} />
             <Tab.Screen
               name="sanglier"
-              component={G_sanglier}
+              component={boar_activity}
               options={{
               tabBarLabel: 'Graph_sanglier',
               tabBarIcon: ({focused}) => (
                 <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
                   <Image
-                    source={require('../icons/boar.png')}
+                    source={require('../../icons/boar.png')}
                     resizeMode="contain"
                     style={{
                       bottom: '30%',
@@ -96,13 +96,13 @@ function NavTabAcitivty() {
               }} />
             <Tab.Screen
               name="Graph"
-              component={Graph}
+              component={global_activity}
               options={{
               tabBarLabel: 'Graph',
               tabBarIcon: ({focused}) => (
                 <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
                   <Image
-                    source={require('../icons/all.png')}
+                    source={require('../../icons/all.png')}
                     resizeMode="contain"
                     style={{
                       bottom: '30%',
@@ -123,7 +123,7 @@ function Header() {
   return (
     <View style={style.header}>
       <ImageBackground
-        source={require('../icons/banner.png')}
+        source={require('../../icons/banner.png')}
         resizeMode='cover'
         style={{
           flex: 1,
