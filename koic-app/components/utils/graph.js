@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Button, StatusBar, Dimensions, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, StatusBar, Dimensions, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { VictoryBar, VictoryAxis, VictoryScatter, VictoryChart, VictoryTheme, VictoryLine, VictoryCustomTheme } from 'victory-native';
 import { style } from './style.js';
 
@@ -186,5 +186,23 @@ function Chart (props) {
       </VictoryChart>
     </View>
 
+  )
+}
+
+export const Header = (props) => {
+  return (
+    <View style={style.header}>
+      <ImageBackground
+        source={require('../../icons/banner.png')}
+        resizeMode='cover'
+        style={{
+          flex: 1,
+          alignItems: 'center'
+        }}>
+        <View style={style.headerBar}>
+          <Text style={{fontSize: 25, fontWeight: 'bold', marginRight: '35%', marginLeft: '10%', color: 'white'}}>{props.text}</Text>
+        </View>
+      </ImageBackground>
+    </View>
   )
 }

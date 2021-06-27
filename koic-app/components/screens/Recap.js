@@ -9,7 +9,8 @@ import boar_activity from '../Activity/boar_activity'
 import stream from './Stream'
 import global_activity from '../Activity/global_activity'
 import { ScrollView } from 'react-native-gesture-handler';
-
+import { Header } from '../utils/graph'
+import { style } from '../utils/style'
 
 const wWidth = Dimensions.get('window').width;
 const wHeight = Dimensions.get('window').height;
@@ -18,7 +19,7 @@ const Tab = createBottomTabNavigator();
 function NavTabAcitivty() {
     return (
         <View style={style.global}>
-          <Header />
+          <Header text='Activity'/>
           <Tab.Navigator
             tabBarOptions={{
               showLabel: false,
@@ -119,23 +120,6 @@ function NavTabAcitivty() {
     )
 }
 
-function Header() {
-  return (
-    <View style={style.header}>
-      <ImageBackground
-        source={require('../../icons/banner.png')}
-        resizeMode='cover'
-        style={{
-          flex: 1,
-          alignItems: 'center'
-        }}>
-        <View style={style.headerBar}>
-          <Text style={{fontSize: 25, fontWeight: 'bold', marginRight: '35%', marginLeft: '10%', color: 'white'}}>Acitivity</Text>
-        </View>
-      </ImageBackground>
-    </View>
-  )
-}
 export default class Recap extends React.Component {
     render() {
         return (
@@ -146,35 +130,35 @@ export default class Recap extends React.Component {
     }
 }
 
-const style = StyleSheet.create({
-    headerBar: {
-      marginTop: '10%',
-      width: '100%',
-      alignItems: 'flex-end',
-      paddingHorizontal: '10%',
-      borderBottomLeftRadius: 20,
-      borderBottomRightRadius: 20,
-      paddingHorizontal: 20,
-    },
-    header: {
-      width: '100%',
-      height: 100,
-    },
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      width : wWidth,
-      height : wHeight,
-    },
-    global: {
-      width: wWidth, 
-      height: wHeight,
-      flex: 1,
-      justifyContent: 'center',
-      resizeMode: 'contain',
-      position: 'absolute',
-      // alignItems: 'center',
-      // flexDirection: 'column',
-      // backgroundColor: '#1b212c'
-    },
-})
+// const style = StyleSheet.create({
+//     headerBar: {
+//       marginTop: '10%',
+//       width: '100%',
+//       alignItems: 'flex-end',
+//       paddingHorizontal: '10%',
+//       borderBottomLeftRadius: 20,
+//       borderBottomRightRadius: 20,
+//       paddingHorizontal: 20,
+//     },
+//     header: {
+//       width: '100%',
+//       height: 100,
+//     },
+//     container: {
+//       flex: 1,
+//       alignItems: 'center',
+//       width : wWidth,
+//       height : wHeight,
+//     },
+//     global: {
+//       width: wWidth, 
+//       height: wHeight,
+//       flex: 1,
+//       justifyContent: 'center',
+//       resizeMode: 'contain',
+//       position: 'absolute',
+//       // alignItems: 'center',
+//       // flexDirection: 'column',
+//       // backgroundColor: '#1b212c'
+//     },
+// })

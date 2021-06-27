@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
+const wWidth = Dimensions.get('window').width;
+const wHeight = Dimensions.get('window').height;
 
 export const style = StyleSheet.create({
     textMax: {
@@ -14,9 +16,6 @@ export const style = StyleSheet.create({
       fontWeight: 'bold',
       color: '#6c53f8',
       marginLeft: '8%'
-    },
-    container: {
-      // flex: 1,
     },
     cardGraph: {
       width: '90%',
@@ -77,5 +76,35 @@ export const style = StyleSheet.create({
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
       elevation: 5,
-    }
+    },
+    headerBar: {
+      marginTop: '10%',
+      width: '100%',
+      alignItems: 'flex-end',
+      paddingHorizontal: '10%',
+      borderBottomLeftRadius: 20,
+      borderBottomRightRadius: 20,
+      paddingHorizontal: 20,
+    },
+    header: {
+      width: '100%',
+      height: 100,
+    },
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      width : wWidth,
+      height : wHeight,
+    },
+    global: {
+      width: wWidth,
+      height: wHeight,
+      flex: 1,
+      justifyContent: 'center',
+      resizeMode: 'contain',
+      position: 'absolute',
+      // alignItems: 'center',
+      // flexDirection: 'column',
+      // backgroundColor: '#1b212c'
+    },
   })

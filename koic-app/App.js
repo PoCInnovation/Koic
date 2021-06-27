@@ -1,17 +1,17 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Button, StatusBar, Dimensions, Image } from 'react-native';
-import { TabNavigator } from 'react-navigation'
+// import { TabNavigator } from 'react-navigation'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Stream from './components/screens/Stream'
 import Activity from './components/screens/Recap'
-// import G_corbeau from './components/Graph/Graph_corbeau'
 import About from './components/screens/About'
-import { Ionicons } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Header } from 'react-native-elements';
-import { createStackNavigator } from 'react-navigation';
+import Settings from './components/screens/settings'
+// import { Ionicons } from '@expo/vector-icons';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+// import { Header } from 'react-native-elements';
+// import { createStackNavigator } from 'react-navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const wWidth = Dimensions.get('window').width;
@@ -80,7 +80,7 @@ function NavTab() {
               }} />
               <Tab.Screen
                 name="Settings"
-                component={Stream}
+                component={Settings}
                 options={{
                   tabBarLabel: 'Settings',
                 tabBarIcon: ({focused}) => (
