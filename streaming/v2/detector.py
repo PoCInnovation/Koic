@@ -23,7 +23,7 @@ class Detector:
         # result.print()
         points_data = result.xyxy[0].numpy()
         for xmin, ymin, xmax, ymax, confidence, class_nb in points_data:
-            logging.info(f"New object found : {class_nb} (label_name)")
+            logging.info(f"New object found : {int(class_nb)}")
             frame = cv2.rectangle(
                 frame.copy(),
                 (int(xmin), int(ymin)),

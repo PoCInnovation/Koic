@@ -56,9 +56,9 @@ detector = Detector("yolov5s")
 
 client = socket.socket()
 # At home
-# client.connect(('192.168.1.5', 1245))
+# client.connect(('192.168.1.5', 2555))
 # At school
-client.connect(('10.224.33.237', 1245))
+client.connect(('10.224.33.237', 2555))
 
 co = client.makefile('rb')
 decoder = h264decoder.H264Decoder()
