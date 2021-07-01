@@ -1,9 +1,11 @@
+import os
 from flask import Flask
 from routes.stream import stream
 from routes.animals import animals
 
 def init_config(app):
-    pass
+    env_config = os.getenv("APP_SETTINGS", "config.DevelopmentConfig")
+    app.config.from_object(env_config)
 
 def create_app():
     app = Flask(__name__)
