@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from routes.stream import stream
 from routes.animals import animals
 
@@ -16,6 +17,9 @@ def create_app():
 
     return app
 
+app = create_app()
+db = SQLAlchemy(app)
+
 if __name__ == '__main__':
     from argparse import ArgumentParser
 
@@ -23,9 +27,7 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--port', default=5000, type=int, help='port to listen on')
     args = parser.parse_args()
 
-    app = create_app()
     port = args.port
-
     app.run(host='0.0.0.0', port=port)
 
 
@@ -37,6 +39,5 @@ if __name__ == '__main__':
 
 # GET   /api/docs
 # GET   /stream
-
 
 
