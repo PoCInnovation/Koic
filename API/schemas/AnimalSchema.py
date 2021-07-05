@@ -21,10 +21,3 @@ class AnimalSchema(ma.SQLAlchemySchema):
     @post_load
     def make_animal(self, data, **kwargs):
         return Animal(**data)
-
-# Animals:
-
-# ID            uuid
-# NAME          Enum (Raven, Boar)
-# DETECTED_AT   DateTime
-# CREATED_AT    DateTime    NOW()

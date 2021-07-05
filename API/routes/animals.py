@@ -27,6 +27,7 @@ def register_new_detection():
         db.session.commit()
     except ValidationError as e:
         print(e.messages)
+        # Error handling TODO
         return "Invalid data gave"
     return payload
 

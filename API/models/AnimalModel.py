@@ -16,12 +16,3 @@ class Animal(db.Model):
     name = db.Column('name', db.Enum(*[e.name for e in Animals], name="animal_name"))
     detected_at = db.Column('detected_at', db.DateTime())
     created_at = db.Column('created_at', db.DateTime(timezone=True), default=datetime.now, server_default=sqlalchemy.sql.func.now())
-
-# Database Architecture
-
-# Animals:
-
-# ID            uuid
-# NAME          Enum (Raven, Boar)
-# DETECTED_AT   DateTime
-# CREATED_AT    DateTime    NOW()
