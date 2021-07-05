@@ -1,1 +1,1 @@
-from models.AnimalModel import Animal
+from models.AnimalModel import Animal, Animals

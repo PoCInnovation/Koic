@@ -1,4 +1,5 @@
 from sqlalchemy.dialects.postgresql import UUID
+import sqlalchemy
 from enum import Enum
 from database import db
 from datetime import datetime
@@ -14,7 +15,7 @@ class Animal(db.Model):
     id = db.Column('id', UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     name = db.Column('name', db.Enum(Animals))
     detected_at = db.Column('detected_at', db.DateTime())
-    created_at = db.Column('created_at', db.DateTime(), default=datetime.now)
+    created_at = db.Column('created_at', db.DateTime(timezone=True), default=datetime.now, server_default=sqlalchemy.sql.func.now())
 
 # Database Architecture
 

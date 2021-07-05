@@ -1,6 +1,8 @@
+from database import db
 from flask import Blueprint, request
 from markupsafe import escape
 from models import Animal
+from marshmallow import ValidationError
 from schemas import AnimalSchema, AnimalsSchema
 
 animals = Blueprint('/api/animals', __name__)
@@ -12,12 +14,24 @@ def get_detection_info():
     return animals_schema.dump({ "detections": detections })
 
 def register_new_detection():
-    print(request.data)
+    payload = request.get_json()
 
-
-    return "POST /api/animals"
+    if payload is None:
+        # Error handling TODO
+        return "Not json"
+    animals_schema = AnimalsSchema(only=("detections.name", "detections.detected_at"))
+    try:
+        animals = animals_schema.load(payload)
+        for animal in animals["detections"]:
+            db.session.add(animal)
+        db.session.commit()
+    except ValidationError as e:
+        print(e.messages)
+        return "Invalid data gave"
+    return payload
 
 @animals.route('/', methods=['GET', 'POST'])
+@animals.route('', methods=['GET', 'POST'])
 def handle_animals_requests():
     if request.method == 'POST':
         return register_new_detection()
