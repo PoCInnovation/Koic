@@ -5,8 +5,8 @@ from datetime import datetime
 import uuid
 
 class Animals(Enum):
-    raven = 0,
-    boar = 1
+    raven = "raven",
+    boar = "boar"
 
 class Animal(db.Model):
     __tablename__ = "Animal"

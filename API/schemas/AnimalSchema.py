@@ -1,9 +1,10 @@
+from database import ma
 from models import Animal
 from flask_marshmallow import Schema
+from marshmallow import post_load, post_dump
 from marshmallow.fields import Str, UUID, DateTime
-from marshmallow_sqlalchemy import ModelSchema
 
-class AnimalSchema(ModelSchema):
+class AnimalSchema(ma.SQLAlchemySchema):
 
     id = UUID(dump_only=True)
     name = Str(required=True)
@@ -12,6 +13,10 @@ class AnimalSchema(ModelSchema):
 
     class Meta:
         model = Animal
+
+    @post_load
+    def make_animal(self, data, **kwargs):
+        return Animal(**data)
 
 # Animals:
 

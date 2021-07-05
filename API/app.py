@@ -1,7 +1,7 @@
 import os
 import sys
 from flask import Flask
-from database import db
+from database import db, ma
 from routes.stream import stream
 from routes.animals import animals
 
@@ -19,6 +19,7 @@ def create_app():
     return app
 
 app = create_app()
+ma.init_app(app)
 try:
     db.init_app(app)
 except Exception as e:
