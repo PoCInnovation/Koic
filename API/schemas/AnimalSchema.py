@@ -14,6 +14,10 @@ class AnimalSchema(ma.SQLAlchemySchema):
     class Meta:
         model = Animal
 
+    @post_dump(pass_many=False)
+    def dump_animal(self, data, many, **kwargs):
+        return {"id": data["id"], "name": data["name"], "detected_at": data["detected_at"], "created_at": data["created_at"]}
+
     @post_load
     def make_animal(self, data, **kwargs):
         return Animal(**data)

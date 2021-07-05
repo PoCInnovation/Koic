@@ -40,4 +40,7 @@ def handle_animals_requests():
 
 @animals.route('/<name>', methods=['GET'])
 def get_animal_data(name):
-    return escape(name)
+    animals_schema = AnimalsSchema()
+
+    animals = Animal.query.filter_by(name=escape(name)).all()
+    return animals_schema.dump({ "detections": animals })
