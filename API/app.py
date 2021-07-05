@@ -1,6 +1,7 @@
 import os
+import sys
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from database import db
 from routes.stream import stream
 from routes.animals import animals
 
@@ -18,7 +19,11 @@ def create_app():
     return app
 
 app = create_app()
-db = SQLAlchemy(app)
+try:
+    db.init_app(app)
+except Exception as e:
+    print("[-] Unable to connect to the database: Aborting...", file=sys.stderr)
+    exit(1)
 
 if __name__ == '__main__':
     from argparse import ArgumentParser

@@ -1,5 +1,7 @@
 from flask import Blueprint, request
 from markupsafe import escape
+from models import Animal
+from schemas import AnimalSchema
 
 animals = Blueprint('/api/animals', __name__)
 
@@ -7,6 +9,9 @@ def get_detection_info():
     return "GET /animals"
 
 def register_new_detection():
+    print(request.data)
+
+
     return "POST /api/animals"
 
 @animals.route('/', methods=['GET', 'POST'])
