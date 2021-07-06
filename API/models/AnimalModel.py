@@ -6,7 +6,7 @@ from datetime import datetime
 import uuid
 
 class Animals(Enum):
-    raven = "raven",
+    raven = "raven"
     boar = "boar"
 
 class Animal(db.Model):
