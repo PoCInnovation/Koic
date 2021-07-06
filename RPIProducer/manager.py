@@ -25,6 +25,7 @@ class Manager:
         print("[+] RPI is starting capturing its environment...")
         for foo in self.camera.capture_continuous(stream, 'jpeg'):
             try:
+                print("[+] New frame")
                 stream.seek(0)
                 self.producer.send("CAMERA_1", stream.read())
                 dt = time.time() - start
