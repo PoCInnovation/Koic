@@ -6,7 +6,6 @@ import cv2
 import json
 import asyncio
 import aiohttp
-import requests
 import numpy as np
 from PIL import Image
 from ai import Detector
@@ -31,6 +30,7 @@ class Worker:
             async with session.post(f"{self.endpoint}/api/animals", json.dumps(payload).encode()) as res:
                 print(res.status)
                 print(await res.text())
+                ## Log information for success or error
 
     async def process_ai(self, img_bytes):
         img = Image.open(io.BytesIO(img_bytes))
