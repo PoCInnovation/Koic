@@ -1,0 +1,43 @@
+import io
+import time
+from picamera import PiCamera
+from kafka import KafkaProducer
+
+class Manager:
+
+    def __init__(self):
+        self.producer = KafkaProducer(
+            "CAMERA_1",
+            bootstrap_servers=["localhost:9202"]
+        )
+
+    def configure_camera(self, camera):
+        print("[+] Configurating camera...")
+        camera.resolution = (640, 480)
+        time.sleep(2)
+
+    async def start_capture(self):
+        with PiCamera() as camera:
+            self.configure_camera(camera)
+            stream = io.BytesIO()
+            start = time.time()
+
+            print("[+] RPI is starting capturing its environment...")
+            for foo in camera.capture_continuous(stream, 'jpeg'):
+                try:
+                    stream.seek(0)
+                    self.producer.send("CAMERA_1", stream.read())
+                    dt = time.time() - start
+                    print(f"[+] Stream capturing since {dt:.2f}s\r", end="")
+                    stream.seek(0)
+                    stream.truncate()
+                    time.sleep(0.2)
+                except KeyboardInterrupt:
+                    await self.stop_capture()
+                    break
+
+    async def stop_capture(self):
+        self.camera.stop_capturing()
+
+    async def close(self):
+        self.stop_capture()
