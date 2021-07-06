@@ -10,7 +10,7 @@ async def main():
     except:
         print("[+] An error has been caught")
     finally:
-        manager.close()
+        await manager.close()
     print("[+] Exiting")
 
 if __name__ == "__main__":
