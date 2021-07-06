@@ -42,7 +42,7 @@ class Worker:
 
         if len(results) != 0:
             print(results)
-            # await register_detected_animals(results)
+            await register_detected_animals(results)
 
     async def run(self):
         # 'msg' contains the buffer of the image sent by the RPI
@@ -50,5 +50,6 @@ class Worker:
             await self.process_ai(msg.value)
 
 if __name__ == "__main__":
+        # Put configuration into the environment TODO
         worker = Worker("CAMERA_1", "http://localhost:5000/api")
         asyncio.run(worker.run())
