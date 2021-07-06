@@ -10,34 +10,36 @@ class Manager:
             "CAMERA_1",
             bootstrap_servers=["localhost:9202"]
         )
+        self.camera = PiCamera()
 
-    def configure_camera(self, camera):
+    def configure_camera(self):
         print("[+] Configurating camera...")
-        camera.resolution = (640, 480)
+        self.camera.resolution = (640, 480)
+        self.camera.start_preview()
         time.sleep(2)
 
     async def start_capture(self):
-        with PiCamera() as camera:
-            self.configure_camera(camera)
-            stream = io.BytesIO()
-            start = time.time()
+        self.configure_camera()
+        stream = io.BytesIO()
+        start = time.time()
 
-            print("[+] RPI is starting capturing its environment...")
-            for foo in camera.capture_continuous(stream, 'jpeg'):
-                try:
-                    stream.seek(0)
-                    self.producer.send("CAMERA_1", stream.read())
-                    dt = time.time() - start
-                    print(f"[+] Stream capturing since {dt:.2f}s\r", end="")
-                    stream.seek(0)
-                    stream.truncate()
-                    time.sleep(0.2)
-                except KeyboardInterrupt:
-                    await self.stop_capture()
-                    break
+        print("[+] RPI is starting capturing its environment...")
+        for foo in self.camera.capture_continuous(stream, 'jpeg'):
+            try:
+                stream.seek(0)
+                self.producer.send("CAMERA_1", stream.read())
+                dt = time.time() - start
+                print(f"[+] Stream capturing since {dt:.2f}s\r", end="")
+                stream.seek(0)
+                stream.truncate()
+                time.sleep(0.2)
+            except KeyboardInterrupt:
+                await self.stop_capture()
+                break
 
     async def stop_capture(self):
         self.camera.stop_capturing()
+        self.camera.stop_preview()
 
     async def close(self):
         self.stop_capture()
