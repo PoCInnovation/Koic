@@ -17,7 +17,6 @@ class Detector:
             except:
                 raise ValueError("Invalid format for file containing labels")
         # Load labels (from URL) TODO
-        # elif "from_url" in kwargs:
         else:
             raise ValueError("No labels precised for this model")
 
