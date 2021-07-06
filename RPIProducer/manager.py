@@ -26,7 +26,8 @@ class Manager:
         for foo in self.camera.capture_continuous(stream, 'jpeg'):
             try:
                 stream.seek(0)
-                self.producer.send("CAMERA_1", stream.read())
+                print(stream.read())
+                # self.producer.send("CAMERA_1", stream.read())
                 dt = time.time() - start
                 print(f"[+] Stream capturing since {dt:.2f}s\r", end="")
                 stream.seek(0)
