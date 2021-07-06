@@ -38,8 +38,8 @@ class Manager:
                 break
 
     async def stop_capture(self):
-        self.camera.stop_capturing()
         self.camera.stop_preview()
+        self.camera.close()
 
     async def close(self):
         await self.stop_capture()
