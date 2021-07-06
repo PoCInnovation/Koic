@@ -41,13 +41,12 @@ class Worker:
         results = self.ai.detect(img_cv)
 
         if len(results) != 0:
-            await register_detected_animals(results)
+            print(results)
+            # await register_detected_animals(results)
 
     async def run(self):
         # 'msg' contains the buffer of the image sent by the RPI
         for msg in self.consumer:
-            print("[+] Got a new message to read:")
-            # print(msg.value)
             await self.process_ai(msg.value)
 
 if __name__ == "__main__":
