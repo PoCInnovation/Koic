@@ -42,4 +42,4 @@ class Manager:
         self.camera.stop_preview()
 
     async def close(self):
-        self.stop_capture()
+        await self.stop_capture()
