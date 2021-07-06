@@ -42,7 +42,7 @@ class Worker:
 
         if len(results) != 0:
             print(results)
-            await register_detected_animals(results)
+            # await self.register_detected_animals(results)
 
     async def run(self):
         # 'msg' contains the buffer of the image sent by the RPI
