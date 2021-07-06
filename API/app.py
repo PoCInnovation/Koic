@@ -4,6 +4,7 @@ from flask import Flask
 from database import db, ma
 from routes.stream import stream
 from routes.animals import animals
+from flasgger import Swagger
 
 def init_config(app):
     env_config = os.getenv("APP_SETTINGS", "config.DevelopmentConfig")
@@ -15,6 +16,8 @@ def create_app():
     init_config(app)
     app.register_blueprint(animals, url_prefix='/api/animals')
     app.register_blueprint(stream, url_prefix='/stream')
+
+    swagger = Swagger(app)
 
     return app
 

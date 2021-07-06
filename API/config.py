@@ -9,6 +9,9 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URI", "postgresql://root:password@localhost:5432/koic_detections")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     VERSION = os.getenv("VERSION", "1.0.0")
+    SWAGGER = {
+        'title': "KoiC API Documentation"
+    }
 
 class ProductionConfig(Config):
     pass
