@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+    db:
+        container_name: koic_db
+        image: postgres:13.3-alpine
+        ports:
+            - 5432:5432
+        volumes:
+            - db:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_DB=koic_detections
+            - POSTGRES_PASSWORD=password
+
+volumes:
+    db:
