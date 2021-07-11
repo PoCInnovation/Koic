@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Button, StatusBar, Dimensions, TouchableOpacity, Image, ImageBackground } from 'react-native';
-import { VictoryBar, VictoryAxis, VictoryScatter, VictoryChart, VictoryTheme, VictoryLine, VictoryCustomTheme } from 'victory-native';
+import { Text, View, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { VictoryAxis, VictoryScatter, VictoryChart, VictoryLine, VictoryCustomTheme } from 'victory-native';
 import { style } from './style.js';
 
 export const ItemHour = (props) => {

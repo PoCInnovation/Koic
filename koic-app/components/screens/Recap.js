@@ -1,14 +1,9 @@
 import React from 'react'
 import {View, Text, StyleSheet, Dimensions, Image, ImageBackground } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import raven_activity from '../Activity/raven_activity'
 import boar_activity from '../Activity/boar_activity'
-import stream from './Stream'
 import global_activity from '../Activity/global_activity'
-import { ScrollView } from 'react-native-gesture-handler';
 import { Header } from '../utils/graph'
 import { style } from '../utils/style'
 
@@ -129,36 +124,3 @@ export default class Recap extends React.Component {
         );
     }
 }
-
-// const style = StyleSheet.create({
-//     headerBar: {
-//       marginTop: '10%',
-//       width: '100%',
-//       alignItems: 'flex-end',
-//       paddingHorizontal: '10%',
-//       borderBottomLeftRadius: 20,
-//       borderBottomRightRadius: 20,
-//       paddingHorizontal: 20,
-//     },
-//     header: {
-//       width: '100%',
-//       height: 100,
-//     },
-//     container: {
-//       flex: 1,
-//       alignItems: 'center',
-//       width : wWidth,
-//       height : wHeight,
-//     },
-//     global: {
-//       width: wWidth, 
-//       height: wHeight,
-//       flex: 1,
-//       justifyContent: 'center',
-//       resizeMode: 'contain',
-//       position: 'absolute',
-//       // alignItems: 'center',
-//       // flexDirection: 'column',
-//       // backgroundColor: '#1b212c'
-//     },
-// })

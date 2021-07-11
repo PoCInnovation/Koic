@@ -4,10 +4,6 @@ import { Header } from '../utils/graph'
 import { style } from '../utils/style'
 import { Linking } from 'react-native';
 
-function Contact () {
-    
-}
-
 export default class Settings extends React.Component {
     render() {
         return (

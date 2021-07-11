@@ -103,8 +103,5 @@ export const style = StyleSheet.create({
       justifyContent: 'center',
       resizeMode: 'contain',
       position: 'absolute',
-      // alignItems: 'center',
-      // flexDirection: 'column',
-      // backgroundColor: '#1b212c'
     },
   })
