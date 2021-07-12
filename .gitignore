@@ -1,2 +1,4 @@
-# APP
 node_modules
+yolov5s.pt
+env
+__pycache__
