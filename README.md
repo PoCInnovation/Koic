@@ -2,7 +2,7 @@
 
 Give a ⭐️ if you like this project!
 
-[![](images/poc.png)](https://www.poc-innovation.fr/)
+[![](assets/poc.png)](https://www.poc-innovation.fr/)
 
 Koic is a connected scarecrow that can be used to scare away crop pests such as crows and wild boars in various ways.
 
