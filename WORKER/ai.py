@@ -1,11 +1,14 @@
 import torch
 import yaml
+import os
 import requests
 from datetime import datetime
 
 class Detector:
-    def __init__(self, hub="ultralytics/yolov5", model_name="yolov5s", threshold=0.5, **kwargs):
-        self.model = torch.hub.load(hub, model_name)
+    def __init__(self, hub="ultralytics/yolov5", model_name=None, threshold=0.5, **kwargs):
+        self.model = torch.hub.load(hub, "yolov5s")
+        if model_name is None:
+            self.model.load_state_dict(torch.load(f"{os.path.dirname(os.path.realpath(__file__))}/{model_name}")['model'].state_dict())
         self.labels = {}
         self.threshold = threshold
         if "from_file" in kwargs:

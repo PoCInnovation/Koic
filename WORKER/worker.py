@@ -9,12 +9,19 @@ import aiohttp
 import numpy as np
 from PIL import Image
 from ai import Detector
-from datetime import datetime
+from json import JSONEncoder
+from datetime import datetime, date
 from kafka import KafkaConsumer
+
+class DateTimeEncoder(JSONEncoder):
+    #Override the default method
+    def default(self, obj):
+        if isinstance(obj, (date, datetime)):
+            return obj.isoformat()
 
 class Worker:
     def __init__(self, topic, endpoint):
-        self.ai = Detector(from_file="coco.yaml")
+        self.ai = Detector(from_file="coco128.yaml", model_name='last.pt')
         self.endpoint = endpoint
         self.consumer = KafkaConsumer(
             topic,
@@ -25,13 +32,16 @@ class Worker:
 
     async def register_detected_animals(self, detections):
         payload = { "detections" : detections }
+        print(json.dumps(payload, cls=DateTimeEncoder))
 
         async with aiohttp.ClientSession() as session:
-            async with session.post(f"{self.endpoint}/api/animals", json.dumps(payload).encode()) as res:
-                print(res.status)
-                print(await res.text())
-                ## Log information for success or error
-
+            try:
+                async with session.post(f"{self.endpoint}/api/animals", data=json.dumps(payload, cls=DateTimeEncoder).encode()) as res:
+                    print(res.status)
+                    print(await res.text())
+                    ## Log information for success or error
+            except:
+                print("Couldn't post data to the remote server")
     async def process_ai(self, img_bytes):
         img = Image.open(io.BytesIO(img_bytes))
         img_cv = np.array(img)
@@ -39,8 +49,9 @@ class Worker:
 
         # AI Processing TODO
         results = self.ai.detect(img_cv)
-
+        print(results)
         if len(results) != 0:
+            print("Image processed")
             await self.register_detected_animals(results)
 
     async def run(self):
