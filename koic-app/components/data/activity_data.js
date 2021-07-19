@@ -1,19 +1,39 @@
-export const boarData = [
-    { x: 15, y: 9},
-    { x: 20, y: 8 },
-    { x: 16, y: 10 },
-    { x: 13, y: 20 },
-    { x: 3, y: 7 },
-    { x: 14, y: 13 },
-    { x: 4, y: 8 }
-  ]
+import raven from './raven.json'
 
-export const ravenData = [
-    { x: 6, y: 6},
-    { x: 0, y: 0 },
-    { x: 12, y: 3 },
-    { x: 9, y: 15 },
-    { x: 2, y: 22 },
-    { x: 18, y: 13 },
-    { x: 1, y: 8 }
-  ]
+const day =()=>{
+  
+  var day = new Date().getDate() + '';
+  var month = new Date().getMonth() + 1 + '';
+  var year = new Date().getFullYear() + '';
+  
+  if (day.length == 1)
+    return year + "-" + month + "-" + "0" + day;
+  else if (month.length == 1)
+    return year + "-" + "0" + month + "-" + day;
+  else
+    return year + "-" + month + "-" + day;
+}
+
+let date = day()
+
+function parse (props) {
+  
+  var array = new Array
+  var hour = ''
+  var len = Object.keys(props.detections).length
+  for (let i = 0; i < len; i++) {
+    var test = props.detections[i].detected_at;
+    if (test.includes(date)) {
+      for (let j = 0; j < test.length; j++)
+        if (j > 10 && j < 19) {
+          hour = hour + test[j]
+        }
+      }
+      array.push({date: 1, nb: hour})
+    hour = '';
+  }
+  return array
+}
+
+export const boarData = parse(raven);
+export const ravenData = parse(raven);
