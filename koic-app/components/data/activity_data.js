@@ -24,14 +24,17 @@ function parse (props) {
   for (let i = 0; i < len; i++) {
     var test = props.detections[i].detected_at;
     if (test.includes(date)) {
-      for (let j = 0; j < test.length; j++)
+      for (let j = 0; j < test.length; j++) {
+        console.log(test)
         if (j > 10 && j < 19) {
           hour = hour + test[j]
         }
       }
-      array.push({date: 1, nb: hour})
+      array.push({x: hour, y: 1})
+    }
     hour = '';
   }
+  console.log(array)
   return array
 }
 

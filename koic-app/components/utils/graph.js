@@ -78,6 +78,8 @@ export const ItemMax = (props) => {
             }
           }}
           data={props.data}
+          x='x'
+          y='y'
           animate={{
             duration: 2000,
             onLoad: { duration: 1000 }
@@ -91,6 +93,8 @@ export const ItemMax = (props) => {
             }
           }}
           data={props.data2}
+          x='x'
+          y='y'
           animate={{
             duration: 2000,
             onLoad: { duration: 1000 }
@@ -152,12 +156,16 @@ function Chart (props) {
           }
         }}
         data={props.data}
+        x='x'
+        y='y'
         animate={{
           duration: 2000,
           onLoad: { duration: 1000 }
         }} />
         <VictoryScatter
           data={props.data}
+          x='x'
+          y='y'
           size={7}
           style={{
             data: {
@@ -165,7 +173,8 @@ function Chart (props) {
             }
           }} />
         <VictoryAxis
-          dependentAxis
+        dependentAxis
+        tickValues={[1, 10, 15, 20, 25, 30]}
           style={{
             axis: {
               stroke: 'transparent'
@@ -175,6 +184,8 @@ function Chart (props) {
             }
           }}/>
         <VictoryAxis
+          fixLabelOverlap
+          style={{ tickLabels: { padding: 16, fontSize: 8 } }}
           style={{
             axis: {
               stroke: 'transparent'
