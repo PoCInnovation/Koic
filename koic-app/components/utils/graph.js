@@ -174,7 +174,7 @@ function Chart (props) {
           }} />
         <VictoryAxis
         dependentAxis
-        tickValues={[1, 10, 15, 20, 25, 30]}
+        tickValues={[1, 2, 3, 4]}
           style={{
             axis: {
               stroke: 'transparent'
@@ -184,8 +184,7 @@ function Chart (props) {
             }
           }}/>
         <VictoryAxis
-          fixLabelOverlap
-          style={{ tickLabels: { padding: 16, fontSize: 8 } }}
+          tickformat={(t) => `${Math.round(t)}h`}
           style={{
             axis: {
               stroke: 'transparent'

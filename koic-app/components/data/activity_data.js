@@ -19,24 +19,49 @@ let date = day()
 function parse (props) {
   
   var array = new Array
+  var nb = 1;
   var hour = ''
   var len = Object.keys(props.detections).length
+  var add = '';
+
   for (let i = 0; i < len; i++) {
     var test = props.detections[i].detected_at;
     if (test.includes(date)) {
       for (let j = 0; j < test.length; j++) {
-        console.log(test)
-        if (j > 10 && j < 19) {
+        if (j > 10 && j < 13) {
           hour = hour + test[j]
+          console.log(hour)
+          console.log(test)
+          for (let a = i; a < len; a++) {
+            for (let b = 0; b < props.detections[a].detected_at.length; b++)
+              if (b > 10 && b < 13) {
+                add = add +  props.detections[i].detected_at[b];
+              }
+            }
+            if (hour.includes(add)) {
+              nb++;
+            }
+            add = ''
         }
       }
-      array.push({x: hour, y: 1})
     }
+    array.push({x: Number(hour), y: nb})
     hour = '';
+    nb = 1;
   }
   console.log(array)
   return array
 }
 
-export const boarData = parse(raven);
+export const boarData = [{x: 0, y: 2}];
 export const ravenData = parse(raven);
+
+// else {
+//   for (let s = 0; s < array.length; s++) {
+//         console.log(array.length)
+//         // console.log(hour)
+//         // console.log(array[s].x)
+//         if (array[s].x !== Number(hour))
+//           array.push({x: Number(hour), y: nb})
+//   }
+
