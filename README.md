@@ -27,7 +27,7 @@ The application is divided by a tab that allows you to navigate between the diff
 
 ### Install repository
 ```
-$ git clone https://github.com/PoCInnovation/Koic.$ git
+$ git clone https://github.com/PoCInnovation/Koic
 $ cd Koic
 ```
 

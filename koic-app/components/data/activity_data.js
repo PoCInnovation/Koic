@@ -56,6 +56,32 @@ function parse (props) {
 export const boarData = [{x: 0, y: 2}];
 export const ravenData = parse(raven);
 
+export const maxHour = () => {
+
+  var max = ravenData[0].x;
+
+  for (let i = 0; ravenData[i].x; i++) {
+    if (ravenData[i].x > max)
+      max = ravenData[i].x;
+  }
+  console.log(ravenData)
+  console.log(max)
+  return (max);
+}
+
+export const maxNb = () => {
+
+  var max = ravenData[0].x;
+
+  for (let i = 0; ravenData[i].y; i++) {
+    if (ravenData[i].y > max)
+      max = ravenData[i].y;
+  }
+  console.log(ravenData)
+  console.log(max)
+  return (max);
+}
+
 // else {
 //   for (let s = 0; s < array.length; s++) {
 //         console.log(array.length)
