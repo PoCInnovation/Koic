@@ -1,6 +1,6 @@
 # KOIC
 
-Koic is a connected scarecrow that can be used to scare away crop pests such as crows and wild boars in various ways.
+Koic is a connected scarecrow who is equipped with cameras that film the terrain in real time. The filmed images are then analysed. Depending on the animal that is hit, the scarecrow will choose a suitable way to repel it in a natural way.
 
 ## Installation
 
