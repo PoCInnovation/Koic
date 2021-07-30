@@ -1,4 +1,6 @@
-import raven from './raven.json'
+// import raven from './raven.json'
+var raven = fetch('http://127.0.0.1:5000/api/animals/raven')
+
 
 const day =()=>{
   
@@ -16,6 +18,43 @@ const day =()=>{
 
 let date = day()
 
+// function parse (props) {
+  
+//   var array = new Array
+//   var nb = 1;
+//   var hour = ''
+//   var len = Object.keys(props.detections).length
+//   var add = '';
+
+//   for (let i = 0; i < len; i++) {
+//     var test = props.detections[i].detected_at;
+//     if (test.includes(date)) {
+//       for (let j = 0; j < test.length; j++) {
+//         if (j > 10 && j < 13) {
+//           hour = hour + test[j]
+//           // console.log(hour)
+//           // console.log(test)
+//           for (let a = i; a < len; a++) {
+//             for (let b = 0; b < props.detections[a].detected_at.length; b++)
+//               if (b > 10 && b < 13) {
+//                 add = add +  props.detections[i].detected_at[b];
+//               }
+//             }
+//             if (hour.includes(add)) {
+//               nb++;
+//             }
+//             add = ''
+//         }
+//       }
+//     }
+//     array.push({x: Number(hour), y: nb})
+//     hour = '';
+//     nb = 1;
+//   }
+//   // console.log(array)
+//   return array
+// }
+
 function parse (props) {
   
   var array = new Array
@@ -23,31 +62,42 @@ function parse (props) {
   var hour = ''
   var len = Object.keys(props.detections).length
   var add = '';
+  var notpush = false
 
+  if (len < 1) {
+    array.push({x: 0, y: 0})
+    return array
+  }
   for (let i = 0; i < len; i++) {
     var test = props.detections[i].detected_at;
     if (test.includes(date)) {
       for (let j = 0; j < test.length; j++) {
         if (j > 10 && j < 13) {
           hour = hour + test[j]
-          console.log(hour)
-          console.log(test)
           for (let a = i; a < len; a++) {
             for (let b = 0; b < props.detections[a].detected_at.length; b++)
               if (b > 10 && b < 13) {
                 add = add +  props.detections[i].detected_at[b];
               }
             }
-            if (hour.includes(add)) {
-              nb++;
+            for (let i = 0; i < Object.keys(array).length; i++) {
+              var jsp = array[i].x
+              if (jsp === Number(hour)) {
+                console.log('ui')
+                array[i].y += 1
+                notpush = true
+              }
             }
             add = ''
         }
       }
+      if (notpush === false) {
+        console.log(nb)
+        array.push({x: Number(hour), y: nb})
+      }
+      hour = '';
+      nb = 1;
     }
-    array.push({x: Number(hour), y: nb})
-    hour = '';
-    nb = 1;
   }
   console.log(array)
   return array
@@ -56,32 +106,34 @@ function parse (props) {
 export const boarData = [{x: 0, y: 2}];
 export const ravenData = parse(raven);
 
-export const maxHour = () => {
+function maxHour () {
 
+  if (Object.keys(ravenData).length < 1) {
+    return ('0h')
+  }
   var max = ravenData[0].x;
-
-  for (let i = 0; ravenData[i].x; i++) {
+  for (let i = 0; i < Object.keys(ravenData).length; i++) {
     if (ravenData[i].x > max)
       max = ravenData[i].x;
   }
-  console.log(ravenData)
-  console.log(max)
-  return (max);
+  return (max + 'h');
 }
 
-export const maxNb = () => {
+function maxNb() {
+  if (Object.keys(ravenData).length < 1) {
+    return ('0')
+  }
+  var max = ravenData[0].y;
 
-  var max = ravenData[0].x;
-
-  for (let i = 0; ravenData[i].y; i++) {
+  for (let i = 0; i < Object.keys(ravenData).length; i++) {
     if (ravenData[i].y > max)
       max = ravenData[i].y;
   }
-  console.log(ravenData)
-  console.log(max)
-  return (max);
+  return max + ''
 }
 
+export const maxN = maxNb() + ''  
+export const maxH = maxHour() + ''
 // else {
 //   for (let s = 0; s < array.length; s++) {
 //         console.log(array.length)
