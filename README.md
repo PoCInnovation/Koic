@@ -4,6 +4,11 @@ Koic is a connected scarecrow who is equipped with cameras that film the terrain
 
 ## Installation
 
+### Prerequisites
+```
+Docker
+Flask
+```
 ### Install repository
 ```
 $ git clone https://github.com/PoCInnovation/Koic
@@ -12,17 +17,21 @@ $ cd Koic
 
 ### Install packages and dependencies
 ```
-$ pip install -r requirements.txt
+Fedora : $ sudo dnf install libpq-devel
+Ubuntu: $ sudo apt-get install libpq-dev
+Debian / OS X : $ brew install postgresql
+$ npm install --global expo-cli
+$ npm i react-native
+$ pip install -r API/requirements.txt
 ```
+
 ## Quick Start
 
 ```
-$ cd API/
-$ flask run
-$ docker-compose up
-$ cd Koic-app/
-$ npm install
-$ expo start
+$ pyhton3 API/migrations/setup.py
+$ API/ docker-compose up
+$ API/flask run #turn in new terminal
+$ koic-app/expo start #turn in new terminal
 ```
 
 ## Features

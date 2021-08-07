@@ -1,5 +1,7 @@
 // import raven from './raven.json'
-var raven = fetch('http://127.0.0.1:5000/api/animals/raven')
+// import boar from './boar.json'
+var test = fetch('http://192.168.1.255:5000/api/animals/raven')
+var raven = JSON.stringify(test)
 
 
 const day =()=>{
@@ -61,9 +63,11 @@ function parse (props) {
   var nb = 1;
   var hour = ''
   var len = Object.keys(props.detections).length
+  console.log(props.detections)
   var add = '';
   var notpush = false
 
+  console.log(raven)
   if (len < 1) {
     array.push({x: 0, y: 0})
     return array
@@ -81,9 +85,8 @@ function parse (props) {
               }
             }
             for (let i = 0; i < Object.keys(array).length; i++) {
-              var jsp = array[i].x
-              if (jsp === Number(hour)) {
-                console.log('ui')
+              var isMany = array[i].x
+              if (isMany === Number(hour)) {
                 array[i].y += 1
                 notpush = true
               }
