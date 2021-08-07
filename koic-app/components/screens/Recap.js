@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, StyleSheet, Dimensions, Image, ImageBackground } from 'react-native'
+import {View, Dimensions, Image } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import raven_activity from '../Activity/raven_activity'
 import boar_activity from '../Activity/boar_activity'
@@ -11,7 +11,7 @@ const wWidth = Dimensions.get('window').width;
 const wHeight = Dimensions.get('window').height;
 const Tab = createBottomTabNavigator();
 
-function NavTabAcitivty() {
+function NavTabActivity() {
     return (
         <View style={style.global}>
           <Header text='Activity'/>
@@ -35,8 +35,6 @@ function NavTabAcitivty() {
                   bottom: '80%',
                   borderRadius: 100,
                   backgroundColor: "white",
-                  elevation: 5,
-                  shadowOpacity: .10,
                   shadowColor: "#000",
                   shadowOffset: {
                       width: 0,
@@ -119,7 +117,7 @@ export default class Recap extends React.Component {
     render() {
         return (
           <View>
-            <NavTabAcitivty />
+            <NavTabActivity />
           </View>
         );
     }

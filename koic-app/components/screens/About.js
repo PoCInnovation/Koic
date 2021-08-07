@@ -1,10 +1,8 @@
-import React from 'react'
-import {View, Text, StyleSheet } from 'react-native'
-import { Header } from '../utils/graph'
-import Hyperlink from 'react-native-hyperlink'
-import { style } from '../utils/style'
+import React from 'react';
+import {View, Text, StyleSheet } from 'react-native';
+import { Header } from '../utils/graph';
 
-function Infos () {
+function Infos() {
     return (
         <View>
             <Text style={styles.Title}>

@@ -81,7 +81,6 @@ export const style = StyleSheet.create({
       marginTop: '10%',
       width: '100%',
       alignItems: 'flex-end',
-      paddingHorizontal: '10%',
       borderBottomLeftRadius: 20,
       borderBottomRightRadius: 20,
       paddingHorizontal: 20,

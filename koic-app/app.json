@@ -26,15 +26,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "infoPlist": {
-      "NSAppTransportSecurity": {
-        "blah.s3.amazonaws.com": {
-          "NSExceptionAllowsInsecureHTTPLoads": true,
-          "NSRequiresCertificateTransparency": false,
-          "NSIncludesSubdomains": true
-        }
-      }
     }
   }
 }

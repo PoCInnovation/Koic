@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Image, ImageBackground } from 'react-nati
 import { VictoryAxis, VictoryScatter, VictoryChart, VictoryLine, VictoryCustomTheme } from 'victory-native';
 import { style } from './style.js';
 
-export const ItemHour = (props) => {
+export const ItemHour = ({ hour }) => {
     return ( 
       <TouchableOpacity style={style.cardMax}>
         <View style={{flexDirection: 'row'}}>
@@ -17,7 +17,7 @@ export const ItemHour = (props) => {
                 width: 25,
                 height: 25
               }} />
-              <Text style={style.textHour}>{props.hour}</Text>
+              <Text style={style.textHour}>{hour}</Text>
           </View>
         </View>
       </TouchableOpacity>

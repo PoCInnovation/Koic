@@ -3,3 +3,4 @@ yolov5s.pt
 env
 __pycache__
 .expo
+.idea/
