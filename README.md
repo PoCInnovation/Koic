@@ -49,6 +49,8 @@ $ git clone git@github.com:PoCInnovation/Koic.git
 ## Quick Start
 
 ```
+$ echo IP=<ip_adress> >> API/.env
+$ echo IP=<ip_adress> >> koic-app/.env
 $ API/ docker-compose up
 $ pyhton3 API/migrations/setup.py
 $ API/python3 app.py #turn in new terminal
