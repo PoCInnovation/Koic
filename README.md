@@ -11,7 +11,7 @@ Flask
 ```
 ### Install repository
 ```
-$ git clone https://github.com/PoCInnovation/Koic
+$ git clone git@github.com:PoCInnovation/Koic.git
 $ cd Koic
 ```
 
@@ -20,18 +20,40 @@ $ cd Koic
 Fedora : $ sudo dnf install libpq-devel
 Ubuntu: $ sudo apt-get install libpq-dev
 Debian / OS X : $ brew install postgresql
-$ npm install --global expo-cli
-$ npm i react-native
+$ koic-app/sudo npm install --global expo-cli
+$ koic-app/sudo npm install
 $ pip install -r API/requirements.txt
+```
+## Raspi installation
+
+
+For this part you must have your raspberry pi connected to the same local network as your computer.
+
+Get your ip address like this:
+```
+$ ifconfig
+```
+On the terminal of your computer, look for the ip of your raspberry pi:
+```
+$ sudo nmap -sn <ip_address>.0/24
+```
+Once you have the address, establish the ssh connection with your raspberry pi:
+```
+$ ssh pi@<ip_address_raspberry_pi>
+```
+Once connected:
+```
+$ git clone git@github.com:PoCInnovation/Koic.git
 ```
 
 ## Quick Start
 
 ```
-$ pyhton3 API/migrations/setup.py
 $ API/ docker-compose up
-$ API/flask run #turn in new terminal
+$ pyhton3 API/migrations/setup.py
+$ API/python3 app.py #turn in new terminal
 $ koic-app/expo start #turn in new terminal
+$ kafka-docker/docker-compose up #in the raspberry pi
 ```
 
 ## Features

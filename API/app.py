@@ -5,6 +5,10 @@ from database import db, ma
 from routes.stream import stream
 from routes.animals import animals
 from flasgger import Swagger
+from dotenv import load_dotenv
+load_dotenv()
+
+IP = os.environ['IP']
 
 def init_config(app):
     env_config = os.getenv("APP_SETTINGS", "config.DevelopmentConfig")
@@ -37,7 +41,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     port = args.port
-    app.run(host='192.168.0.43', port=port)
+    app.run(host=IP, port=port)
 
 
 # AUTHENTICATION: Bearer Token
