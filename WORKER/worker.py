@@ -25,7 +25,7 @@ class Worker:
         self.endpoint = endpoint
         self.consumer = KafkaConsumer(
             topic,
-            bootstrap_servers="localhost:9092",
+            bootstrap_servers="localhost:19091",
             group_id="workers",
             auto_offset_reset="latest"
         )
