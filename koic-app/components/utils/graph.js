@@ -116,6 +116,8 @@ export const ItemMax = (props) => {
               }
             }} />
           <VictoryAxis
+            tickValues={[1, 2, 3, 4]}
+            tickformat={(t) => `${Math.round(t)}h`}
             dependentAxis
             style={{
               axis: {
@@ -126,6 +128,7 @@ export const ItemMax = (props) => {
               }
             }}/>
           <VictoryAxis
+            tickformat={(t) => `${Math.round(t)}h`}
             style={{
               axis: {
                 stroke: 'transparent'
@@ -173,6 +176,7 @@ function Chart (props) {
             }
           }} />
         <VictoryAxis
+        tickformat={(t) => `${Math.round(t)}h`}
         dependentAxis
         tickValues={[1, 2, 3, 4]}
           style={{

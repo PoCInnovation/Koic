@@ -16,5 +16,5 @@ services:
       - 9092:9092
     environment:
       JMX_PORT: 8004
-      KAFKA_ADVERTISED_HOST_NAME: "192.168.1.45"
+      KAFKA_ADVERTISED_HOST_NAME: "192.168.1.33"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
