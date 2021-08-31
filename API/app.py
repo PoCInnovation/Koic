@@ -8,7 +8,7 @@ from flasgger import Swagger
 from dotenv import load_dotenv
 load_dotenv()
 
-IP = os.environ['IP']
+IP = os.getenv('IP', '127.0.0.1')
 
 def init_config(app):
     env_config = os.getenv("APP_SETTINGS", "config.DevelopmentConfig")
