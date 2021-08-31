@@ -1,1 +1,0 @@
-from models.AnimalModel import Animal, Animals
