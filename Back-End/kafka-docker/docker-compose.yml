@@ -1,23 +1,20 @@
-version: "3.9"
+version: "3"
 
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:latest
+    image: wurstmeister/zookeeper:latest
+    container_name: zookeeper
     ports:
-      - "22181:22181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 22181
+      - 2181:2181
+
   kafka:
-    image: confluentinc/cp-kafka:latest
-    ports:
-      - "19092:19092"
-      - "19091:19091"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:22181
-      KAFKA_LISTENERS: LISTENER_INTERNAL://kafka:19092,LISTENER_EXTERNAL://kafka:19091
-      KAFKA_ADVERTISED_LISTENERS: LISTENER_INTERNAL://kafka:19092,LISTENER_EXTERNAL://localhost:19091
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_INTERNAL:PLAINTEXT,LISTENER_EXTERNAL:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_INTERNAL
+    image: wurstmeister/kafka:latest
+    container_name: kafka
     depends_on:
       - zookeeper
+    ports:
+      - 9092:9092
+    environment:
+      JMX_PORT: 8004
+      KAFKA_ADVERTISED_HOST_NAME: "192.168.0.17"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181

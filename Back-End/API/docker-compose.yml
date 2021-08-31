@@ -15,9 +15,7 @@ services:
     api:
         container_name: koic_api
         build: .
-        ports: 
-            - 5000:5000
-
+        network_mode: "host"
 
 volumes:
     db:
