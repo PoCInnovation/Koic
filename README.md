@@ -92,10 +92,6 @@ Once you have the address, establish the **ssh connection** with your raspberry 
 ssh pi@<ip_address_raspberry_pi>
 ```
 
-```diff
--Peut etre dire ce qu'il faut install sur la pi ?-
-```
-
 ## Quick Start
 ### Back-End
 
@@ -136,7 +132,8 @@ koic-app/yarn start
 
 Scan the `QR code` displayed in your terminal with your phone
 
-```bash
+```diff
+- A Supprimer mais je le laisse au cas ou-
 echo IP=<ip_adress> >> API/.env
 echo IP=<ip_adress> >> koic-app/.env
 API/ docker-compose up
