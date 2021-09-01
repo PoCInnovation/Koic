@@ -95,23 +95,35 @@ ssh pi@<ip_address_raspberry_pi>
 ## Quick Start
 ### Back-End
 
+Now you know your **ip address**, in **Back-End/docker-compose.yml** change the variable environnement `KAFKA_ADVERTISED_HOST_NAME` by your ip address like this:
+```yml
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka:latest
+    ports:
+      - 9092:9092
+    environment:
+      - "JMX_PORT=8004"
+      - "KAFKA_ADVERTISED_HOST_NAME={ip address}" #<-- Change here
+      - "KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181"
+    depends_on:
+      - zookeeper
+```
+
 On your computer, and at the `root` of this repo run these commands
 
 ```bash
-# Run API
-docker-compose -f Back-End/API/docker-compose.yml up -d
+cd Back-End/
+docker-compose up -d
 ```
+When ```db``` services are up please create the table with:
 
 ```bash
-# Run IA old WORKER
-python3 -m pip install -r Back-End/IA/requirements.txt
-python3 Back-End/IA/worker.py
+python3 API/migrations/setup.py
 ```
-
-```bash
-# Kafka Consumer
-docker-compose -f Back-End/kafka-docker/docker-compose.yml up -d
-```
+:warning:
+Now create a `kafka cluster` with [CMAK](https://github.com/yahoo/CMAK).
+Follow this tutorial [Install Kafka manager | Kafka for beginners](https://www.youtube.com/watch?v=AlQfpG10vAc&list=PLxoOrmZMsAWxXBF8h_TPqYJNsh3x4GyO4&index=5)
 
 ### On your raspberry pi
 

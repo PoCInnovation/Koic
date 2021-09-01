@@ -2,22 +2,22 @@ version: "3"
 
 services:
   zookeeper:
-    image: wurstmeister/zookeeper:latest
     container_name: zookeeper
+    image: wurstmeister/zookeeper:latest
     ports:
       - 2181:2181
 
   kafka:
-    image: wurstmeister/kafka:latest
     container_name: kafka
-    depends_on:
-      - zookeeper
+    image: wurstmeister/kafka:latest
     ports:
       - 9092:9092
     environment:
       - "JMX_PORT=8004"
       - "KAFKA_ADVERTISED_HOST_NAME=192.168.10.133"
       - "KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181"
+    depends_on:
+      - zookeeper
 
   db:
     container_name: koic_db
@@ -46,6 +46,17 @@ services:
       - "PORT=5000"
     depends_on:
       - kafka
+
+  ai:
+    container_name: koic_ai
+    build: ./IA
+    restart: always
+    environment:
+      - "ENDPOINT_URL=http://api:5000/api"
+      - "TOPIC=CAMERA_1"
+      - "KAFKA_URL=kafka:9092"
+    depends_on:
+      - api
 
 volumes:
     db:
