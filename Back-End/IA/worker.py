@@ -3,6 +3,7 @@
 import io
 import sys
 import cv2
+import os
 import json
 import asyncio
 import aiohttp
@@ -61,5 +62,5 @@ class Worker:
 
 if __name__ == "__main__":
         # Put configuration into the environment TODO
-        worker = Worker("CAMERA_1", "http://localhost:5000/api")
+        worker = Worker(os.getenv("TOPIC", "CAMERA_1"), os.getenv("ENDPOINT_URL", "http://localhost:5000/api"))
         asyncio.run(worker.run())
