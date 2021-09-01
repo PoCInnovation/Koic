@@ -26,7 +26,7 @@ class Worker:
         self.endpoint = endpoint
         self.consumer = KafkaConsumer(
             topic,
-            bootstrap_servers="localhost:19091",
+            bootstrap_servers="localhost:9092",
             group_id="workers",
             auto_offset_reset="latest"
         )
@@ -37,7 +37,12 @@ class Worker:
 
         async with aiohttp.ClientSession() as session:
             try:
-                async with session.post(f"{self.endpoint}/api/animals", data=json.dumps(payload, cls=DateTimeEncoder).encode()) as res:
+                headers={'content-type': 'application/json' }
+                async with session.post(
+                    f"{self.endpoint}/animals",
+                    data=json.dumps(payload, cls=DateTimeEncoder).encode(),
+                    headers=headers
+                ) as res:
                     print(res.status)
                     print(await res.text())
                     ## Log information for success or error

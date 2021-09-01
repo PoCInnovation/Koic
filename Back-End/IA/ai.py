@@ -29,7 +29,8 @@ class Detector:
         points_data = result.xyxy[0].numpy()
 
         for _, _, _, _, confidence, class_nb, in points_data:
-            objects_detected.append({"name": self.labels[class_nb], "confidence": confidence })
+            print(confidence, class_nb)
+            objects_detected.append({"name": self.labels[int(class_nb)], "confidence": confidence })
 
         return list(map(
             lambda e: { "name": e["name"], "detected_at": datetime.utcnow() },

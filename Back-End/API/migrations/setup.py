@@ -13,6 +13,7 @@ Base = declarative_base()
 class Animals(enum.Enum):
     raven = "raven"
     boar = "boar"
+    person = "person"
 
 class AnimalSeed(Base):
     __tablename__ = "Animal"

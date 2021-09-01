@@ -8,6 +8,7 @@ import uuid
 class Animals(Enum):
     raven = "raven"
     boar = "boar"
+    person = "person"
 
 class Animal(db.Model):
     __tablename__ = "Animal"

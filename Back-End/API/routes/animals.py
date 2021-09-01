@@ -1,3 +1,4 @@
+import sys
 from database import db
 from flasgger import swag_from
 from flask import Blueprint, request
@@ -32,8 +33,8 @@ def register_new_detection():
     error_schema = ErrorSchema()
 
     if payload is None:
-        return error_schema.dump({ messages: ["Invalid format"] }), HTTPStatus.BAD_REQUEST.value
-
+        return error_schema.dump({ "messages": ["Invalid format"] }), HTTPStatus.BAD_REQUEST.value
+    print(payload, file=sys.stderr)
     animals_schema = AnimalsSchema(only=("detections.name", "detections.detected_at"))
     try:
         animals = animals_schema.load(payload)
