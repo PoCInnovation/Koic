@@ -7,16 +7,37 @@ Koic
 Koic is a **connected scarecrow** who is equipped with cameras that film the terrain in real time.  
 The filmed images are then analysed. Depending on the animal that is hit, the scarecrow will choose a suitable way **to repel it in a natural way.**
 
+## Summary
+- [Desciption](#desciption)
+- [Summary](#summary)
+- [Install](#install)
+  - [:rocket: Clone repository](#rocket-clone-repository)
+  - [:warning: Requirement](#warning-requirement)
+  - [:iphone: The Expo Client App](#iphone-the-expo-client-app)
+  - [:strawberry: Raspi installation](#strawberry-raspi-installation)
+    - [Enabling the Camera](#enabling-the-camera)
+      - [Using the desktop](#using-the-desktop)
+      - [Using the command line](#using-the-command-line)
+    - [Controlling the pi remotely](#controlling-the-pi-remotely)
+- [Quick Start](#quick-start)
+  - [Back-End](#back-end)
+  - [On your raspberry pi](#on-your-raspberry-pi)
+  - [Front-End / Mobile App](#front-end--mobile-app)
+- [Features](#features)
+  - [Application](#application)
+  - [Scarecrow connected](#scarecrow-connected)
+- [Authors](#authors)
+
 ## Install
 
-#### :rocket: Clone repository
+### :rocket: Clone repository
 You have to clone the repo on the **Raspberry Pi** and your **computer**.
 
 ```shell
 git clone git@github.com:PoCInnovation/Koic.git
 ```
 
-#### :warning: Requirement
+### :warning: Requirement
 
 - [Node](https://nodejs.org/en/download/)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install/#debian-stable)
@@ -24,41 +45,50 @@ git clone git@github.com:PoCInnovation/Koic.git
 - [Docker-compose](https://docs.docker.com/compose/install/)
 - Have a Raspberry Pi and its camera module (PiCamera)
 
-### Install packages and dependencies
-```bash
-sudo dnf install libpq-devel    # Fedora
-sudo apt-get install libpq-dev  # Ubuntu
-brew install postgresql         # Debian / OS X
-```
+### :iphone: The Expo Client App
 
-```bash
-koic-app/sudo npm install --global expo-cli
-koic-app/sudo npm install
-python -m pip install -r API/requirements.txt
-```
+The Expo App will load the build bundle of the Expo CLI and allow you to test our app without deploying it or building with Android Studio.
 
-### Raspi installation
+Download links:
+- [iOS](https://apps.apple.com/us/app/expo-client/id982107779)
+- [Android](https://play.google.com/store/apps/details?id=host.exp.exponent)
+
+### :strawberry: Raspi installation
+#### Enabling the Camera
+##### Using the desktop
+
+If you are new to raspberry I advise you to follow this tutorial:  
+- [Getting started with the Camera Module](https://projects.raspberrypi.org/en/projects/getting-started-with-picamera)
+
+##### Using the command line
+
+Open the `raspi-config` tool from the terminal:
+```shell
+sudo raspi-config
+```
+Select `Interfacing Options` then `Camera` and press `Enter`. Choose `Yes` then `Ok`. Go to `Finish` and you’ll be prompted to reboot.
+
+#### Controlling the pi remotely
 
 Your raspberry pi and your computer must be on the **same network**.
-
 
 ```diff
 -Récupèrer l'address ip de la pi tu peux faire un script à lancer-
 ```
 
 Get your ip address like this:
-```bash
+```shell
 hostname -I | cut -d' ' -f1
 ```
 
 On the terminal of your computer, look for the ip of your raspberry pi:
-```bash
+```shell
 sudo nmap -sn <ip_address>.0/24
 ```
 
 Once you have the address, establish the **ssh connection** with your raspberry pi:
 
-```bash
+```shell
 ssh pi@<ip_address_raspberry_pi>
 ```
 
@@ -66,14 +96,45 @@ ssh pi@<ip_address_raspberry_pi>
 -Peut etre dire ce qu'il faut install sur la pi ?-
 ```
 
-
 ## Quick Start
-### On your computer
+### Back-End
 
-```diff
--Les commandes à lancer sur ton pc-
-!~ Séparer avec l'app ~!
+On your computer, and at the `root` of this repo run these commands
+
+```bash
+# Run API
+docker-compose -f Back-End/API/docker-compose.yml up -d
 ```
+
+```bash
+# Run IA old WORKER
+python3 -m pip install -r Back-End/IA/requirements.txt
+python3 Back-End/IA/worker.py
+```
+
+```bash
+# Kafka Consumer
+docker-compose -f Back-End/kafka-docker/docker-compose.yml up -d
+```
+
+### On your raspberry pi
+
+Run the kafka producer like this:
+
+```bash
+# Kafka Producer
+python3 RPIProducer/run.py
+```
+
+### Front-End / Mobile App
+
+```bash
+koic-app/npm install --global expo-cli
+koic-app/yarn install
+koic-app/yarn start
+```
+
+Scan the `QR code` displayed in your terminal with your phone
 
 ```bash
 echo IP=<ip_adress> >> API/.env
@@ -84,13 +145,6 @@ API/python3 app.py #turn in new terminal
 koic-app/expo start #turn in new terminal
 kafka-docker/docker-compose up #in the raspberry pi
 ```
-
-### On your raspberry pi
-
-```diff
--Les commandes à lancer sur la pi-
-```
-
 
 ## Features
 
