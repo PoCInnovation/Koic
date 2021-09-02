@@ -20,8 +20,9 @@ The filmed images are then analysed. Depending on the animal that is hit, the sc
       - [Using the command line](#using-the-command-line)
     - [Controlling the pi remotely](#controlling-the-pi-remotely)
 - [Quick Start](#quick-start)
-  - [Back-End](#back-end)
-  - [On your raspberry pi](#on-your-raspberry-pi)
+  - [Back-End / Consumer Kafka](#back-end--consumer-kafka)
+  - [Producer Kafka](#producer-kafka)
+  - [IA](#ia)
   - [Front-End / Mobile App](#front-end--mobile-app)
 - [Features](#features)
   - [Application](#application)
@@ -43,6 +44,7 @@ git clone git@github.com:PoCInnovation/Koic.git
 - [Yarn](https://classic.yarnpkg.com/en/docs/install/#debian-stable)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker-compose](https://docs.docker.com/compose/install/)
+- [Java 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
 - Have a Raspberry Pi and its camera module (PiCamera)
 
 ### :iphone: The Expo Client App
@@ -93,7 +95,7 @@ ssh pi@<ip_address_raspberry_pi>
 ```
 
 ## Quick Start
-### Back-End
+### Back-End / Consumer Kafka
 
 Now you know your **ip address**, in **Back-End/docker-compose.yml** change the variable environnement `KAFKA_ADVERTISED_HOST_NAME` by your ip address like this:
 ```yml
@@ -109,6 +111,22 @@ Now you know your **ip address**, in **Back-End/docker-compose.yml** change the 
     depends_on:
       - zookeeper
 ```
+And in **Back-End/API/routes/stream.py**:
+```py
+from kafka import KafkaConsumer
+from flask import Blueprint, Response
+
+stream = Blueprint('/stream', __name__)
+
+def get_video_stream(id):
+    consumer = KafkaConsumer(f"CAMERA_{int(id)}", bootstrap_servers=["{ip address}:9092"]) #<-- Change here
+
+    for msg in consumer:
+        yield(
+            b'--frame\r\n'
+            b'Content-Type: image/jpg\r\n\r\n' + msg.value + b'\r\n\r\n'
+        )
+```
 
 On your computer, and at the `root` of this repo run these commands
 
@@ -123,15 +141,30 @@ python3 API/migrations/setup.py
 ```
 :warning:
 Now create a `kafka cluster` with [CMAK](https://github.com/yahoo/CMAK).
-Follow this tutorial [Install Kafka manager | Kafka for beginners](https://www.youtube.com/watch?v=AlQfpG10vAc&list=PLxoOrmZMsAWxXBF8h_TPqYJNsh3x4GyO4&index=5)
+Follow this tutorial [Install Kafka manager | Kafka for beginners](https://www.youtube.com/watch?v=AlQfpG10vAc&list=PLxoOrmZMsAWxXBF8h_TPqYJNsh3x4GyO4&index=5)  
+> If you have "KeeperErrorCode = Unimplemented for /kafka-manager/mutex" follow this [issue](https://github.com/yahoo/CMAK/issues/731#issuecomment-643880544)
 
-### On your raspberry pi
+### Producer Kafka
 
-Run the kafka producer like this:
+Check that the above steps have been carried out.  
+If you would test without pi run his command in **RPIProducer/tests**:
+```bash
+python3 fake_producer.py
+```
+
+Run the kafka producer on raspberry pi:
 
 ```bash
 # Kafka Producer
 python3 RPIProducer/run.py
+```
+
+### IA
+
+And on your computer, go to the **Back-End/IA/** for run the model object detection:
+```
+cd IA/
+./worker.py
 ```
 
 ### Front-End / Mobile App
@@ -143,17 +176,6 @@ koic-app/yarn start
 ```
 
 Scan the `QR code` displayed in your terminal with your phone
-
-```diff
-- A Supprimer mais je le laisse au cas ou-
-echo IP=<ip_adress> >> API/.env
-echo IP=<ip_adress> >> koic-app/.env
-API/ docker-compose up
-pyhton3 API/migrations/setup.py
-API/python3 app.py #turn in new terminal
-koic-app/expo start #turn in new terminal
-kafka-docker/docker-compose up #in the raspberry pi
-```
 
 ## Features
 

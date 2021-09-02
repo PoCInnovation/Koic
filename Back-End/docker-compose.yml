@@ -47,16 +47,16 @@ services:
     depends_on:
       - kafka
 
-  ai:
-    container_name: koic_ai
-    build: ./IA
-    restart: always
-    environment:
-      - "ENDPOINT_URL=http://api:5000/api"
-      - "TOPIC=CAMERA_1"
-      - "KAFKA_URL=kafka:9092"
-    depends_on:
-      - api
+  #ai:
+  #  container_name: koic_ai
+  #  build: ./IA
+  #  restart: always
+  #  environment:
+  #    - "ENDPOINT_URL=http://api:5000/api"
+  #    - "TOPIC=CAMERA_1"
+  #    - "KAFKA_URL=kafka:9092"
+  #  depends_on:
+  #    - api
 
 volumes:
     db:
