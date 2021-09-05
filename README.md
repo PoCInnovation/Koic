@@ -27,6 +27,7 @@ The filmed images are then analysed. Depending on the animal that is hit, the sc
 - [Features](#features)
   - [Application](#application)
   - [Scarecrow connected](#scarecrow-connected)
+- [Explain](#explain)
 - [Authors](#authors)
 
 ## Install
@@ -191,9 +192,10 @@ python3 -m pip install -r requirements.txt
 ### Front-End / Mobile App
 
 ```bash
-koic-app/npm install --global expo-cli
-koic-app/yarn install
-koic-app/yarn start
+cd koic-app/
+npm install --global expo-cli
+yarn install
+yarn start
 ```
 
 Scan the `QR code` displayed in your terminal with your phone
@@ -214,6 +216,11 @@ The application is divided by a tab that allows you to navigate between the diff
 ### Scarecrow connected
 
 - Cameras that can film the field in real time and send information that is processed by an API and sent to the application 
+
+## Explain
+
+1. [Architecture Scheme](Documentation/ArchitectureScheme.md)
+2. [Back End custom](Documentation/BackEnd.md)
 
 ## Authors
 
