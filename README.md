@@ -240,8 +240,8 @@ The application is divided by a tab that allows you to navigate between the diff
 
 ## Authors
 
-| [<img src="https://github.com/pr0m3th3usEx.png?size=85" width=85><br><sub>Thomas Michel</sub>](https://github.com/pr0m3th3usEx) | [<img src="https://github.com/Happinesseuh.png?size=85" width=85><br><sub>Inès Maaroufi</sub>](https://github.com/Happinesseuh) 
-| :---: | :---: |
+| [<img src="https://github.com/pr0m3th3usEx.png?size=85" width=85><br><sub>Thomas Michel</sub>](https://github.com/pr0m3th3usEx) | [<img src="https://github.com/Happinesseuh.png?size=85" width=85><br><sub>Inès Maaroufi</sub>](https://github.com/Happinesseuh) | [<img src="https://github.com/Cleopha.png?size=85" width=85><br><sub>Coline Seguret</sub>](https://github.com/Cleopha)
+| :---: | :---: | :---: |
 <h2 align=center>
 Organization
 </h2>
