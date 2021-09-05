@@ -96,6 +96,18 @@ ssh pi@<ip_address_raspberry_pi>
 ```
 
 ## Quick Start
+
+1. Change `Ip Address` (ip of your computer) in:
+   -  **Back-End/docker-compose.yml**
+   -  **Back-End/API/routes/stream.py**
+   -  **RPIProducer/manager.py**
+2. Run docker-compose in Back-End/
+3. Create table in database
+4. Create Kafka Cluster
+5. Run Kafka Producer (raspberry pi or on your computer)
+6. Run IA (Yolov5)
+7. Run Mobile-App
+
 ### Back-End / Consumer Kafka
 
 Now you know your **ip address**, in **Back-End/docker-compose.yml** change the variable environnement `KAFKA_ADVERTISED_HOST_NAME` by your ip address like this:
