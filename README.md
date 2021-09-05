@@ -99,6 +99,7 @@ ssh pi@<ip_address_raspberry_pi>
 
 Now you know your **ip address**, in **Back-End/docker-compose.yml** change the variable environnement `KAFKA_ADVERTISED_HOST_NAME` by your ip address like this:
 ```yml
+# Back-End/docker-compose.yml
   kafka:
     container_name: kafka
     image: wurstmeister/kafka:latest
@@ -113,6 +114,7 @@ Now you know your **ip address**, in **Back-End/docker-compose.yml** change the 
 ```
 And in **Back-End/API/routes/stream.py**:
 ```py
+# Back-End/API/routes/stream.py
 from kafka import KafkaConsumer
 from flask import Blueprint, Response
 
@@ -154,6 +156,24 @@ python3 fake_producer.py
 
 Run the kafka producer on raspberry pi:
 
+before changing the ip address in **RPIProducer/manager.py** as done in the previous step
+
+```py
+# RPIProducer/manager.py
+import io
+import time
+from picamera import PiCamera
+from kafka import KafkaProducer
+
+class Manager:
+
+    def __init__(self):
+        self.producer = KafkaProducer(
+            bootstrap_servers="{ip address}:9092" #<-- Change here
+        )
+        self.camera = PiCamera()
+```
+
 ```bash
 # Kafka Producer
 python3 RPIProducer/run.py
@@ -164,6 +184,7 @@ python3 RPIProducer/run.py
 And on your computer, go to the **Back-End/IA/** for run the model object detection:
 ```
 cd IA/
+python3 -m pip install -r requirements.txt
 ./worker.py
 ```
 
