@@ -2,28 +2,12 @@ import { IP } from '@env'
 
 import parseIntruder from './parseIntruder'
 
-function getMostAffluentHourInObject(data) {
-  if (!Object.keys(data)) {
-    return ('0h')
-  }
-  let max = data[0].x;
-  for (const elem of Object.keys(data)) {
-    if (elem.x > max)
-      max = elem.x;
-  }
-  return (max + 'h');
+function getMostAffluentHourInObject({ maxValue, data }) {
+  return data.findIndex((elem) => elem === maxValue)
 }
 
 function getMaxValueInObject(data) {
-  if (!Object.keys(data)) {
-    return '0';
-  }
-  let max = data[0].y;
-  for (const elem of Object.keys(data)) {
-    if (elem.y > max)
-      max = elem.y;
-  }
-  return max.toString();
+  return Math.max(...data)
 }
 
 function getGlobalMaximum(maxR, maxB) {
@@ -31,7 +15,8 @@ function getGlobalMaximum(maxR, maxB) {
 }
 
 function fetchIntruder(intruder) {
-  return fetch(`http://${IP}:5000/api/animals/${intruder}`).then((res) => {
+  return fetch(`http://${IP}:5000/api/animals/${intruder}`)
+  .then((res) => {
     if (!res.ok) {
       throw Error('Failed fetching raven') // TODO
     }
@@ -43,8 +28,8 @@ function fetchIntruder(intruder) {
 
 function buildIntruderObject(intruder, data) {
   intruder.data = data
-  intruder.maxValue = getMaxValueInObject(intruder.data).toString()
-  intruder.mostAffluentHour = getMostAffluentHourInObject(intruder.data).toString()
+  intruder.maxValue = getMaxValueInObject(intruder.data)
+  intruder.mostAffluentHour = getMostAffluentHourInObject(intruder)
 }
 
 const raven = {
@@ -59,16 +44,23 @@ const boar = {
   mostAffluentHour: undefined  
 }
 
+const person = {
+  data: fetchIntruder('person'),
+  maxValue: undefined,
+  mostAffluentHour: undefined  
+}
+
 const globalData = {
   maxValue: undefined,
   mostAffluentHour: undefined
 }
 
-Promise.all([raven.data, boar.data]).then(([ravenData, boarData]) => {
+Promise.all([raven.data, boar.data, person.data]).then(([ravenData, boarData, personData]) => {
   buildIntruderObject(raven, ravenData)
   buildIntruderObject(boar, boarData)
+  buildIntruderObject(person, personData)
   globalData.maxValue = getGlobalMaximum(raven.maxValue,  boar.maxValue)
   globalData.mostAffluentHour = getGlobalMaximum(raven.mostAffluentHour,  boar.mostAffluentHour)
 })
 
-export { boar, raven, globalData }
+export { boar, raven, person, globalData }

@@ -7,7 +7,7 @@ function Infos() {
         <View>
             <Text style={styles.Title}>
             What is this project ?</Text>
-            <Text style={styles.Text}>Koic is a connected scarecrow who is equipped with cameras that film the terrain in real time.
+            <Text style={styles.Text}>Koic is a connected scarecrow which is equipped with cameras that film the terrain in real time.
             The filmed images are then analysed. Depending on the animal that is hit,
             the scarecrow will choose a suitable way to repel it in a natural way.</Text>
             <Text style={styles.Title}>Who are we?</Text>

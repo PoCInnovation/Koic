@@ -2,6 +2,7 @@ import React from 'react'
 import {View, Dimensions, Image } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import raven_activity from '../Activity/raven_activity'
+import person_activity from '../Activity/person_activity'
 import boar_activity from '../Activity/boar_activity'
 import global_activity from '../Activity/global_activity'
 import { Header } from '../utils/graph'
@@ -82,6 +83,26 @@ function NavTabActivity() {
                       bottom: '30%',
                       width: 30,
                       height: 30,
+                      tintColor: focused ? '#6c53f8' : 'black',
+                    }}
+                  />
+                </View>
+               ),
+              }} />
+            <Tab.Screen
+              name="person"
+              component={person_activity}
+              options={{
+              tabBarLabel: 'Graph_person',
+              tabBarIcon: ({focused}) => (
+                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+                  <Image
+                    source={require('../../icons/person.png')}
+                    resizeMode="contain"
+                    style={{
+                      bottom: '30%',
+                      width: 25,
+                      height: 25,
                       tintColor: focused ? '#6c53f8' : 'black',
                     }}
                   />

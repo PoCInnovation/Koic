@@ -169,7 +169,7 @@ function Chart (props) {
           data={props.data}
           x='x'
           y='y'
-          size={7}
+          size={8}
           style={{
             data: {
               fill: '#6c53f8'
@@ -178,7 +178,7 @@ function Chart (props) {
         <VictoryAxis
         tickformat={(t) => `${Math.round(t)}h`}
         dependentAxis
-        tickValues={[1, 2, 3, 4]}
+        // tickValues={[1, 2, 3, 4]}c
           style={{
             axis: {
               stroke: 'transparent'
@@ -189,6 +189,7 @@ function Chart (props) {
           }}/>
         <VictoryAxis
           tickformat={(t) => `${Math.round(t)}h`}
+          fixLabelOverlap style={{ tickLabels: { padding: 1, fontSize: 8 } }}
           style={{
             axis: {
               stroke: 'transparent'
