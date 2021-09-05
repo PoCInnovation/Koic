@@ -101,6 +101,7 @@ ssh pi@<ip_address_raspberry_pi>
    -  **Back-End/docker-compose.yml**
    -  **Back-End/API/routes/stream.py**
    -  **RPIProducer/manager.py**
+   -  **koic-app/.env**
 2. Run docker-compose in Back-End/
 3. Create table in database
 4. Create Kafka Cluster
@@ -152,6 +153,7 @@ docker-compose up -d
 When ```db``` services are up please create the table with:
 
 ```bash
+python3 -m pip install psycopg2-binary
 python3 API/migrations/setup.py
 ```
 :warning:
@@ -202,6 +204,8 @@ python3 -m pip install -r requirements.txt
 ```
 
 ### Front-End / Mobile App
+
+In **koic-app/.env** change ip by your ip address.  
 
 ```bash
 cd koic-app/
