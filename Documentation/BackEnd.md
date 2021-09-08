@@ -4,6 +4,13 @@
 
 When the api turns go into  http://localhost:5000/apidocs/
 
+### Many stream
+
+Name topics of your kafka like this:  
+- CAMERA_{nb}
+
+With `nb` is the "id" of your stream.
+
 To get the video stream http://localhost:5000/stream/{nb}
 
 For example:  
@@ -56,7 +63,3 @@ names: ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 't
         'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear',
         'hair drier', 'toothbrush']  # class names
 ```  
-
-### Train IA
-
-TODO

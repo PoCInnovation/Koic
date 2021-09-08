@@ -19,7 +19,9 @@ The filmed images are then analysed. Depending on the animal that is hit, the sc
       - [Using the desktop](#using-the-desktop)
       - [Using the command line](#using-the-command-line)
     - [Controlling the pi remotely](#controlling-the-pi-remotely)
+  - [:eye_speech_bubble: Kafka manager](#eye_speech_bubble-kafka-manager)
 - [Quick Start](#quick-start)
+- [Detailed launch](#detailed-launch)
   - [Back-End / Consumer Kafka](#back-end--consumer-kafka)
   - [Producer Kafka](#producer-kafka)
   - [IA](#ia)
@@ -75,18 +77,9 @@ Select `Interfacing Options` then `Camera` and press `Enter`. Choose `Yes` then 
 
 Your raspberry pi and your computer must be on the **same network**.
 
-```diff
--Récupèrer l'address ip de la pi tu peux faire un script à lancer-
-```
-
 Get your ip address like this:
 ```shell
 hostname -I | cut -d' ' -f1
-```
-
-On the terminal of your computer, look for the ip of your raspberry pi:
-```shell
-sudo nmap -sn <ip_address>.0/24
 ```
 
 Once you have the address, establish the **ssh connection** with your raspberry pi:
@@ -94,6 +87,13 @@ Once you have the address, establish the **ssh connection** with your raspberry 
 ```shell
 ssh pi@<ip_address_raspberry_pi>
 ```
+
+### :eye_speech_bubble: Kafka manager
+
+:warning:
+Install [CMAK](https://github.com/yahoo/CMAK).
+Follow this tutorial [Install Kafka manager | Kafka for beginners](https://www.youtube.com/watch?v=AlQfpG10vAc&list=PLxoOrmZMsAWxXBF8h_TPqYJNsh3x4GyO4&index=5)  
+
 
 ## Quick Start
 
@@ -109,9 +109,13 @@ ssh pi@<ip_address_raspberry_pi>
 6. Run IA (Yolov5)
 7. Run Mobile-App
 
-### Back-End / Consumer Kafka
 
+## Detailed launch
+### Back-End / Consumer Kafka
 Now you know your **ip address**, in **Back-End/docker-compose.yml** change the variable environnement `KAFKA_ADVERTISED_HOST_NAME` by your ip address like this:
+<details>
+    <summary>📄 Back-End/docker-compose.yml:</summary>
+
 ```yml
 # Back-End/docker-compose.yml
   kafka:
@@ -126,7 +130,13 @@ Now you know your **ip address**, in **Back-End/docker-compose.yml** change the 
     depends_on:
       - zookeeper
 ```
+</details>
+
 And in **Back-End/API/routes/stream.py**:
+
+<details>
+    <summary>📄 Back-End/API/routes/stream.py:</summary>
+
 ```py
 # Back-End/API/routes/stream.py
 from kafka import KafkaConsumer
@@ -144,6 +154,8 @@ def get_video_stream(id):
         )
 ```
 
+</details>
+
 On your computer, and at the `root` of this repo run these commands
 
 ```bash
@@ -158,7 +170,9 @@ python3 API/migrations/setup.py
 ```
 :warning:
 Now create a `kafka cluster` with [CMAK](https://github.com/yahoo/CMAK).
-Follow this tutorial [Install Kafka manager | Kafka for beginners](https://www.youtube.com/watch?v=AlQfpG10vAc&list=PLxoOrmZMsAWxXBF8h_TPqYJNsh3x4GyO4&index=5)  
+```bash
+bin/cmak -Dconfig.file=conf/application.conf -Dhttp.port=8080
+```
 > If you have "KeeperErrorCode = Unimplemented for /kafka-manager/mutex" follow this [issue](https://github.com/yahoo/CMAK/issues/731#issuecomment-643880544)
 
 ### Producer Kafka
@@ -172,6 +186,10 @@ python3 fake_producer.py
 Run the kafka producer on raspberry pi:
 
 before changing the ip address in **RPIProducer/manager.py** as done in the previous step
+
+<details>
+    <summary>📄 RPIProducer/manager.py:</summary>
+
 
 ```py
 # RPIProducer/manager.py
@@ -188,6 +206,8 @@ class Manager:
         )
         self.camera = PiCamera()
 ```
+
+</details>
 
 ```bash
 # Kafka Producer
