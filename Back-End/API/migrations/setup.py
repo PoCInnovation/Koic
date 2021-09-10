@@ -14,6 +14,7 @@ class Animals(enum.Enum):
     raven = "raven"
     boar = "boar"
     person = "person"
+    chair = "chair"
 
 class AnimalSeed(Base):
     __tablename__ = "Animal"

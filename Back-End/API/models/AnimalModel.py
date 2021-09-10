@@ -9,6 +9,7 @@ class Animals(Enum):
     raven = "raven"
     boar = "boar"
     person = "person"
+    chair = "chair"
 
 class Animal(db.Model):
     __tablename__ = "Animal"
