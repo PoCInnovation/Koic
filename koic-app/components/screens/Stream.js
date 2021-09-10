@@ -1,35 +1,67 @@
-import React, {useEffect} from 'react'
-import { Text, View, Dimensions, StyleSheet, ImageBackground } from 'react-native'
-import { WebView } from 'react-native-webview'
-import { Video } from 'expo-av';
+import React from 'react'
+
+import { View,  SafeAreaView, Button, ScrollView } from 'react-native'
+// import { Video } from 'expo-av'
 import { Header } from '../utils/graph'
-import {IP} from '@env'
+import { style } from '../utils/style.js'
+import IntruderViews from './IntruderViews.js'
 
-const wWidth = Dimensions.get('window').width;
-const wHeight = Dimensions.get('window').height;
+function Stream(props) {
+    const [nbViews, setNbViews] = React.useState(1)
 
-export default function Stream(props) {
     return (
         <>
-        <Header text='Stream'/>
-        <WebView
-        source={{
-          uri: 'http://' + `${IP}` + ':5000/stream/1',
-        }}
-        style={{ flex: 1, alignItems: "center", justifyContent: "center", position: 'relative', width: wWidth, height: wHeight / 2}}
-        />
-        {/* <View >
-            <Video
-                source={
-                    {
-                        uri: 
-                    }
-                }
-                resizeMode="contain"
-                useNativeControls
-                style={{width: wWidth, height: wHeight / 2}}
-            />
-        </View> */}
+            <Header text='Stream'/>
+            <SafeAreaView style={styles.container}>
+                <ScrollView style={styles.scrollView}>
+                    <IntruderViews nbViews={nbViews}/>
+                </ScrollView>
+            </SafeAreaView>
+            <View style={styles.container}>
+                <View style={styles.buttonContainer}>
+                <Button
+                    style={style.button}
+                    title={'Add View'}
+                    onPress={() => {setNbViews(nbViews + 1)}}
+                    accessibilityLabel="Learn more about this purple button"
+                />
+                </View>
+                <View style={styles.buttonContainer}>
+                <Button
+                    style={style.button}
+                    title={'Remove View'}
+                    color={'#841584'}
+                    onPress={() => {
+                        if (nbViews != 1) {
+                            setNbViews(nbViews - 1)
+                        }
+                    }}
+                    accessibilityLabel="Learn more about this purple button"
+                />
+                </View>
+            </View>
         </>
-    );
+    )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 250,
+    },
+    container: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    scrollView: {
+        backgroundColor: 'pink',
+        marginHorizontal: 20,
+    },
+    buttonContainer: {
+      flex: 1,
+    }
+});
+
+export default Stream
