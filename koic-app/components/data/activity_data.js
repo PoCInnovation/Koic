@@ -11,7 +11,7 @@ function getMaxValueInObject(data) {
 }
 
 function getGlobalMaximum(maxR, maxB) {
-  return `${maxR > maxB ? maxR : maxB}\n${maxR > maxB ? 'Raven' : 'Boar'}`
+  return `${maxR > maxB ? maxR : maxB}\n${maxR > maxB ? 'Raven' : 'chair'}`
 }
 
 function fetchIntruder(intruder) {
@@ -38,8 +38,8 @@ const raven = {
   mostAffluentHour: undefined  
 }
 
-const boar = {
-  data: fetchIntruder('boar'),
+const chair = {
+  data: fetchIntruder('chair'),
   maxValue: undefined,
   mostAffluentHour: undefined  
 }
@@ -55,12 +55,12 @@ const globalData = {
   mostAffluentHour: undefined
 }
 
-Promise.all([raven.data, boar.data, person.data]).then(([ravenData, boarData, personData]) => {
+Promise.all([raven.data, chair.data, person.data]).then(([ravenData, chairData, personData]) => {
   buildIntruderObject(raven, ravenData)
-  buildIntruderObject(boar, boarData)
+  buildIntruderObject(chair, chairData)
   buildIntruderObject(person, personData)
-  globalData.maxValue = getGlobalMaximum(raven.maxValue,  boar.maxValue)
-  globalData.mostAffluentHour = getGlobalMaximum(raven.mostAffluentHour,  boar.mostAffluentHour)
+  globalData.maxValue = getGlobalMaximum(raven.maxValue,  chair.maxValue)
+  globalData.mostAffluentHour = getGlobalMaximum(raven.mostAffluentHour,  chair.mostAffluentHour)
 })
 
-export { boar, raven, person, globalData }
+export { chair, raven, person, globalData }

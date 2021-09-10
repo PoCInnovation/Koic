@@ -3,7 +3,7 @@ import {View, Dimensions, Image } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import raven_activity from '../Activity/raven_activity'
 import person_activity from '../Activity/person_activity'
-import boar_activity from '../Activity/boar_activity'
+import chair_activity from '../Activity/chair_activity'
 import global_activity from '../Activity/global_activity'
 import { Header } from '../utils/graph'
 import { style } from '../utils/style'
@@ -70,14 +70,14 @@ function NavTabActivity() {
                ),
               }} />
             <Tab.Screen
-              name="sanglier"
-              component={boar_activity}
+              name="chaise"
+              component={chair_activity}
               options={{
-              tabBarLabel: 'Graph_sanglier',
+              tabBarLabel: 'Graph_chaise',
               tabBarIcon: ({focused}) => (
                 <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
                   <Image
-                    source={require('../../icons/boar.png')}
+                    source={require('../../icons/chair.png')}
                     resizeMode="contain"
                     style={{
                       bottom: '30%',
