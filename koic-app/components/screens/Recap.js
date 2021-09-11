@@ -1,8 +1,9 @@
 import React from 'react'
-import {View, Text, StyleSheet, Dimensions, Image, ImageBackground } from 'react-native'
+import {View, Dimensions, Image } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import raven_activity from '../Activity/raven_activity'
-import boar_activity from '../Activity/boar_activity'
+import person_activity from '../Activity/person_activity'
+import chair_activity from '../Activity/chair_activity'
 import global_activity from '../Activity/global_activity'
 import { Header } from '../utils/graph'
 import { style } from '../utils/style'
@@ -11,7 +12,7 @@ const wWidth = Dimensions.get('window').width;
 const wHeight = Dimensions.get('window').height;
 const Tab = createBottomTabNavigator();
 
-function NavTabAcitivty() {
+function NavTabActivity() {
     return (
         <View style={style.global}>
           <Header text='Activity'/>
@@ -35,8 +36,6 @@ function NavTabAcitivty() {
                   bottom: '80%',
                   borderRadius: 100,
                   backgroundColor: "white",
-                  elevation: 5,
-                  shadowOpacity: .10,
                   shadowColor: "#000",
                   shadowOffset: {
                       width: 0,
@@ -71,19 +70,39 @@ function NavTabAcitivty() {
                ),
               }} />
             <Tab.Screen
-              name="sanglier"
-              component={boar_activity}
+              name="chaise"
+              component={chair_activity}
               options={{
-              tabBarLabel: 'Graph_sanglier',
+              tabBarLabel: 'Graph_chaise',
               tabBarIcon: ({focused}) => (
                 <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
                   <Image
-                    source={require('../../icons/boar.png')}
+                    source={require('../../icons/chair.png')}
                     resizeMode="contain"
                     style={{
                       bottom: '30%',
                       width: 30,
                       height: 30,
+                      tintColor: focused ? '#6c53f8' : 'black',
+                    }}
+                  />
+                </View>
+               ),
+              }} />
+            <Tab.Screen
+              name="person"
+              component={person_activity}
+              options={{
+              tabBarLabel: 'Graph_person',
+              tabBarIcon: ({focused}) => (
+                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+                  <Image
+                    source={require('../../icons/person.png')}
+                    resizeMode="contain"
+                    style={{
+                      bottom: '30%',
+                      width: 25,
+                      height: 25,
                       tintColor: focused ? '#6c53f8' : 'black',
                     }}
                   />
@@ -119,7 +138,7 @@ export default class Recap extends React.Component {
     render() {
         return (
           <View>
-            <NavTabAcitivty />
+            <NavTabActivity />
           </View>
         );
     }

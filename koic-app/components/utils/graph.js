@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Image, ImageBackground } from 'react-nati
 import { VictoryAxis, VictoryScatter, VictoryChart, VictoryLine, VictoryCustomTheme } from 'victory-native';
 import { style } from './style.js';
 
-export const ItemHour = (props) => {
+export const ItemHour = ({ hour }) => {
     return ( 
       <TouchableOpacity style={style.cardMax}>
         <View style={{flexDirection: 'row'}}>
@@ -17,7 +17,7 @@ export const ItemHour = (props) => {
                 width: 25,
                 height: 25
               }} />
-              <Text style={style.textHour}>{props.hour}</Text>
+              <Text style={style.textHour}>{hour}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -116,6 +116,8 @@ export const ItemMax = (props) => {
               }
             }} />
           <VictoryAxis
+            tickValues={[1, 2, 3, 4]}
+            tickformat={(t) => `${Math.round(t)}h`}
             dependentAxis
             style={{
               axis: {
@@ -126,6 +128,7 @@ export const ItemMax = (props) => {
               }
             }}/>
           <VictoryAxis
+            tickformat={(t) => `${Math.round(t)}h`}
             style={{
               axis: {
                 stroke: 'transparent'
@@ -166,15 +169,16 @@ function Chart (props) {
           data={props.data}
           x='x'
           y='y'
-          size={7}
+          size={8}
           style={{
             data: {
               fill: '#6c53f8'
             }
           }} />
         <VictoryAxis
+        tickformat={(t) => `${Math.round(t)}h`}
         dependentAxis
-        tickValues={[1, 2, 3, 4]}
+        // tickValues={[1, 2, 3, 4]}c
           style={{
             axis: {
               stroke: 'transparent'
@@ -185,6 +189,7 @@ function Chart (props) {
           }}/>
         <VictoryAxis
           tickformat={(t) => `${Math.round(t)}h`}
+          fixLabelOverlap style={{ tickLabels: { padding: 1, fontSize: 8 } }}
           style={{
             axis: {
               stroke: 'transparent'

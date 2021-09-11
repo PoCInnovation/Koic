@@ -1,4 +1,31 @@
-node_modules
-yolov5s.pt
-env
+# Editors Files and Folders
+
+.idea/
+.vscode/
+*~
+\#*#
 __pycache__
+env
+.DS_Store
+
+# Expo and React Native
+
+node_modules/
+.expo/
+react_native/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# Delivery
+
+koic-env/
+
+# File
+
+# Binary Files

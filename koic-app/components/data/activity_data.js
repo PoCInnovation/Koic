@@ -1,93 +1,66 @@
-import raven from './raven.json'
+import { IP } from '@env'
 
-const day =()=>{
-  
-  var day = new Date().getDate() + '';
-  var month = new Date().getMonth() + 1 + '';
-  var year = new Date().getFullYear() + '';
-  
-  if (day.length == 1)
-    return year + "-" + month + "-" + "0" + day;
-  else if (month.length == 1)
-    return year + "-" + "0" + month + "-" + day;
-  else
-    return year + "-" + month + "-" + day;
+import parseIntruder from './parseIntruder'
+
+function getMostAffluentHourInObject({ maxValue, data }) {
+  return data.findIndex((elem) => elem === maxValue)
 }
 
-let date = day()
+function getMaxValueInObject(data) {
+  return Math.max(...data)
+}
 
-function parse (props) {
-  
-  var array = new Array
-  var nb = 1;
-  var hour = ''
-  var len = Object.keys(props.detections).length
-  var add = '';
+function getGlobalMaximum(maxR, maxB) {
+  return `${maxR > maxB ? maxR : maxB}\n${maxR > maxB ? 'Raven' : 'chair'}`
+}
 
-  for (let i = 0; i < len; i++) {
-    var test = props.detections[i].detected_at;
-    if (test.includes(date)) {
-      for (let j = 0; j < test.length; j++) {
-        if (j > 10 && j < 13) {
-          hour = hour + test[j]
-          console.log(hour)
-          console.log(test)
-          for (let a = i; a < len; a++) {
-            for (let b = 0; b < props.detections[a].detected_at.length; b++)
-              if (b > 10 && b < 13) {
-                add = add +  props.detections[i].detected_at[b];
-              }
-            }
-            if (hour.includes(add)) {
-              nb++;
-            }
-            add = ''
-        }
-      }
+function fetchIntruder(intruder) {
+  return fetch(`http://${IP}:5000/api/animals/${intruder}`)
+  .then((res) => {
+    if (!res.ok) {
+      throw Error('Failed fetching raven') // TODO
     }
-    array.push({x: Number(hour), y: nb})
-    hour = '';
-    nb = 1;
-  }
-  console.log(array)
-  return array
+    return res.json();
+  }).then((intruder) => {
+    return parseIntruder(intruder);
+  }).catch(console.error)
 }
 
-export const boarData = [{x: 0, y: 2}];
-export const ravenData = parse(raven);
-
-export const maxHour = () => {
-
-  var max = ravenData[0].x;
-
-  for (let i = 0; ravenData[i].x; i++) {
-    if (ravenData[i].x > max)
-      max = ravenData[i].x;
-  }
-  console.log(ravenData)
-  console.log(max)
-  return (max);
+function buildIntruderObject(intruder, data) {
+  intruder.data = data
+  intruder.maxValue = getMaxValueInObject(intruder.data)
+  intruder.mostAffluentHour = getMostAffluentHourInObject(intruder)
 }
 
-export const maxNb = () => {
-
-  var max = ravenData[0].x;
-
-  for (let i = 0; ravenData[i].y; i++) {
-    if (ravenData[i].y > max)
-      max = ravenData[i].y;
-  }
-  console.log(ravenData)
-  console.log(max)
-  return (max);
+const raven = {
+  data: fetchIntruder('raven'),
+  maxValue: undefined,
+  mostAffluentHour: undefined  
 }
 
-// else {
-//   for (let s = 0; s < array.length; s++) {
-//         console.log(array.length)
-//         // console.log(hour)
-//         // console.log(array[s].x)
-//         if (array[s].x !== Number(hour))
-//           array.push({x: Number(hour), y: nb})
-//   }
+const chair = {
+  data: fetchIntruder('chair'),
+  maxValue: undefined,
+  mostAffluentHour: undefined  
+}
 
+const person = {
+  data: fetchIntruder('person'),
+  maxValue: undefined,
+  mostAffluentHour: undefined  
+}
+
+const globalData = {
+  maxValue: undefined,
+  mostAffluentHour: undefined
+}
+
+Promise.all([raven.data, chair.data, person.data]).then(([ravenData, chairData, personData]) => {
+  buildIntruderObject(raven, ravenData)
+  buildIntruderObject(chair, chairData)
+  buildIntruderObject(person, personData)
+  globalData.maxValue = getGlobalMaximum(raven.maxValue,  chair.maxValue)
+  globalData.mostAffluentHour = getGlobalMaximum(raven.mostAffluentHour,  chair.mostAffluentHour)
+})
+
+export { chair, raven, person, globalData }

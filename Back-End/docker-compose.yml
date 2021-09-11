@@ -1,0 +1,62 @@
+version: "3"
+
+services:
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper:latest
+    ports:
+      - 2181:2181
+
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka:latest
+    ports:
+      - 9092:9092
+    environment:
+      - "JMX_PORT=8004"
+      - "KAFKA_ADVERTISED_HOST_NAME=192.168.1.30"
+      - "KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181"
+    depends_on:
+      - zookeeper
+
+  db:
+    container_name: koic_db
+    image: postgres:13.3-alpine
+    ports:
+        - 5432:5432
+    volumes:
+        - db:/var/lib/postgresql/data
+    environment:
+        - "POSTGRES_USER=root"
+        - "POSTGRES_DB=koic_detections"
+        - "POSTGRES_PASSWORD=password"
+  api:
+    container_name: koic_api
+    build:
+      context: ./API
+      args: 
+        - "PORT=5000"
+    ports:
+      - 5000:5000
+    environment:
+      - "APP_SETTINGS=config.ProductionConfig"
+      - "FLASK_ENV=development"
+      - "DATABASE_URI=postgresql://root:password@db:5432/koic_detections"
+      - "IP=0.0.0.0"
+      - "PORT=5000"
+    depends_on:
+      - kafka
+
+  #ai:
+  #  container_name: koic_ai
+  #  build: ./IA
+  #  restart: always
+  #  environment:
+  #    - "ENDPOINT_URL=http://api:5000/api"
+  #    - "TOPIC=CAMERA_1"
+  #    - "KAFKA_URL=kafka:9092"
+  #  depends_on:
+  #    - api
+
+volumes:
+    db:
