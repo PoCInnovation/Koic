@@ -29,9 +29,7 @@ class Animals(enum.Enum):
     # Here add new object détection with her name
 ```
 
-## IA
-
-### Add new animal 
+## IA 
 
 In **IA/coco128.yaml** you will have all the parameters of what your model detects.  
 With `Yolov5s`:  
@@ -62,4 +60,6 @@ names: ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 't
         'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone',
         'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear',
         'hair drier', 'toothbrush']  # class names
-```  
+``` 
+
+For train custom data with yolov5, please refer to this documentation https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
