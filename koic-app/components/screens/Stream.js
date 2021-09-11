@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { View,  SafeAreaView, Button, ScrollView, Styleheet } from 'react-native'
-// import { Video } from 'expo-av'
+import { View,  SafeAreaView, Button, ScrollView } from 'react-native'
 import { Header } from '../utils/graph'
 import { style } from '../utils/style.js'
 import IntruderViews from './IntruderViews.js'
