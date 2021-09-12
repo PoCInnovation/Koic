@@ -4,7 +4,7 @@ from flask import Blueprint, Response
 stream = Blueprint('/stream', __name__)
 
 def get_video_stream(id):
-    consumer = KafkaConsumer(f"CAMERA_{int(id)}", bootstrap_servers=["192.168.1.30:9092"])
+    consumer = KafkaConsumer(f"CAMERA_{int(id)}", bootstrap_servers=["REPLACE_BY_YOUR_IP:9092"])
 
     for msg in consumer:
         yield(

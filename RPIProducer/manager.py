@@ -7,7 +7,7 @@ class Manager:
 
     def __init__(self):
         self.producer = KafkaProducer(
-            bootstrap_servers="192.168.1.30:9092"
+            bootstrap_servers="REPLACE_BY_YOUR_IP:9092"
         )
         self.camera = PiCamera()
 
