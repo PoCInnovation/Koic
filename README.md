@@ -86,24 +86,26 @@ Once you have the address, establish the **ssh connection** with your raspberry 
 
 ```shell
 ssh pi@<ip_address_raspberry_pi>
+scp RPIProducer/manager.py RPIProducer/run.py pi@<ip_address_raspberry_pi>:folder/
 ```
 
 ### :eye_speech_bubble: Kafka manager
 
 :warning:
 Install [CMAK](https://github.com/yahoo/CMAK).
-Follow this tutorial [Install Kafka manager | Kafka for beginners](https://www.youtube.com/watch?v=AlQfpG10vAc&list=PLxoOrmZMsAWxXBF8h_TPqYJNsh3x4GyO4&index=5)  
+Follow this tutorial [Install Kafka manager | Kafka for beginners](https://youtu.be/AlQfpG10vAc?list=PLxoOrmZMsAWxXBF8h_TPqYJNsh3x4GyO4&t=127)  
 
 
 ## Quick Start
 
-1. Change `Ip Address` (ip of your computer) in:
+1. `./script` for change put ip address in all file  
+   Or Change `Ip Address` (ip of your computer) in:
    -  **Back-End/docker-compose.yml**
    -  **Back-End/API/routes/stream.py**
    -  **RPIProducer/manager.py**
    -  **koic-app/.env**
-2. Run docker-compose in Back-End/
-3. Create table in database
+2. Run docker-compose in Back-End/ `docker-compose --file Back-End/docker-compose.yml up --build -d`
+3. Create table in database `./Back-End/API/migrations/setup.py`
 4. Create Kafka Cluster
 5. Run Kafka Producer (raspberry pi or on your computer)
 6. Run IA (Yolov5)

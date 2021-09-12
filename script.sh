@@ -8,9 +8,9 @@ FILES=("Back-End/docker-compose.yml"
 REPLACE=`hostname -I | cut -d' ' -f1`
 FIND='REPLACE_BY_YOUR_IP'
 
-RED='\033[0;32m'
+GREEN='\033[0;32m'
 NC='\033[0m' # No Color
-printf "${RED}Your IP is${NC} ${REPLACE}\n"
+printf "${GREEN}Your IP is${NC} ${REPLACE}\n"
 
 for Item in ${FILES[*]} ;
   do
