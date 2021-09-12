@@ -9,17 +9,17 @@ const wHeight = Dimensions.get('window').height
 
 function IntruderViews({nbViews}) {
     const WebViewStyle = {
-        flex: 1,
+        flex: 2,
         alignItems: "center",
         justifyContent: "center",
         position: 'relative',
         width: wWidth,
-        height: wHeight / 2
+        height: wHeight / 2.8
     }
     const arr = []
 
     for (let i = 0; i < nbViews; ++i) {
-        arr.push(<WebView source={{ uri: `http://${IP}:5000/stream/1` }} style={WebViewStyle} key={i}/>)
+        arr.push(<WebView source={{ uri: `http://${IP}:5000/stream/`+ (i+1) }} style={WebViewStyle} key={i}/>)
     }
     return arr
 }
