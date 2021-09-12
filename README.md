@@ -86,7 +86,6 @@ Once you have the address, establish the **ssh connection** with your raspberry 
 
 ```shell
 ssh pi@<ip_address_raspberry_pi>
-scp RPIProducer/manager.py RPIProducer/run.py pi@<ip_address_raspberry_pi>:folder/
 ```
 
 ### :eye_speech_bubble: Kafka manager
@@ -104,8 +103,8 @@ Follow this tutorial [Install Kafka manager | Kafka for beginners](https://youtu
    -  **Back-End/API/routes/stream.py**
    -  **RPIProducer/manager.py**
    -  **koic-app/.env**
-2. Run docker-compose in Back-End/ `docker-compose --file Back-End/docker-compose.yml up --build -d`
-3. Create table in database `./Back-End/API/migrations/setup.py`
+2. Run docker-compose in Back-End/
+3. Create table in database
 4. Create Kafka Cluster
 5. Run Kafka Producer (raspberry pi or on your computer)
 6. Run IA (Yolov5)
