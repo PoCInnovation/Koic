@@ -92,12 +92,13 @@ ssh pi@<ip_address_raspberry_pi>
 
 :warning:
 Install [CMAK](https://github.com/yahoo/CMAK).
-Follow this tutorial [Install Kafka manager | Kafka for beginners](https://www.youtube.com/watch?v=AlQfpG10vAc&list=PLxoOrmZMsAWxXBF8h_TPqYJNsh3x4GyO4&index=5)  
+Follow this tutorial [Install Kafka manager | Kafka for beginners](https://youtu.be/AlQfpG10vAc?list=PLxoOrmZMsAWxXBF8h_TPqYJNsh3x4GyO4&t=127)  
 
 
 ## Quick Start
 
-1. Change `Ip Address` (ip of your computer) in:
+1. `./script` for change put ip address in all file  
+   Or Change `Ip Address` (ip of your computer) in:
    -  **Back-End/docker-compose.yml**
    -  **Back-End/API/routes/stream.py**
    -  **RPIProducer/manager.py**

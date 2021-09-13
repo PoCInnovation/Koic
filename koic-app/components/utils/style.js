@@ -57,6 +57,11 @@ export const style = StyleSheet.create({
       shadowRadius: 3.84,
       elevation: 5,
     },
+    viewContainerScrollView: {
+      flex: 2,
+      flexDirection: 'row',
+
+    },
     viewContainerButton: {
       flex: 1,
       flexDirection: 'row',
@@ -64,15 +69,20 @@ export const style = StyleSheet.create({
       justifyContent: 'center',
     },
     scrollView: {
+        flex: 1,
+        flexDirection: 'column',
         backgroundColor: 'white',
-        marginHorizontal: 20,
+        marginHorizontal: 10,
+        paddingVertical: 20,
+        flexGrow: 1,
+        
     },
     buttonContainer: {
       flex: 1,
     },
     button: {
         flex: 1,
-        width: '40%',
+        width: '50%',
         paddingVertical: 10,
         height: '30%',
         bottom: '20%',

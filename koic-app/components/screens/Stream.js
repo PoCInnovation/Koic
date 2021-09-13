@@ -11,7 +11,7 @@ function Stream(props) {
     return (
         <>
             <Header text='Stream'/>
-            <SafeAreaView style={style.viewContainerButton}>
+            <SafeAreaView style={style.viewContainerScrollView}>
                 <ScrollView style={style.scrollView}>
                     <IntruderViews nbViews={nbViews}/>
                 </ScrollView>
