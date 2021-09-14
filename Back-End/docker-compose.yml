@@ -19,6 +19,15 @@ services:
     depends_on:
       - zookeeper
 
+  kafka-manager:
+    image: sheepkiller/kafka-manager:latest
+    ports:
+      - "9000:9000"
+    environment:
+      - "ZK_HOSTS=REPLACE_BY_YOUR_IP:2181"
+      - "APPLICATION_SECRET=letmein"
+      - "KM_ARGS=-Djava.net.preferIPv4Stack=true"
+
   db:
     container_name: koic_db
     image: postgres:13.3-alpine
