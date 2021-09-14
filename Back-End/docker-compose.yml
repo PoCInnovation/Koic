@@ -20,6 +20,7 @@ services:
       - zookeeper
 
   kafka-manager:
+    container_name: kafka-manager
     image: sheepkiller/kafka-manager:latest
     ports:
       - "9000:9000"
