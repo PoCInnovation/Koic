@@ -23,7 +23,6 @@ The filmed images are then analysed. Depending on the animal that is hit, the sc
 - [Detailed launch](#detailed-launch)
   - [Back-End / Consumer Kafka](#back-end--consumer-kafka)
   - [Producer Kafka](#producer-kafka)
-  - [IA](#ia)
   - [Front-End / Mobile App](#front-end--mobile-app)
 - [Features](#features)
   - [Application](#application)
@@ -91,7 +90,6 @@ ssh pi@<ip_address_raspberry_pi>
 1. Run launch programm `./launch.sh`
 2. Create Kafka Cluster on http://localhost:9000/addCluster
 3. Run Kafka Producer (raspberry pi or on your computer)
-4. Run IA (Yolov5)
 5. Run Mobile-App
 
 ## Detailed launch
@@ -129,15 +127,6 @@ The programm was copied in `Dowloads` folder
 ```bash
 # Kafka Producer
 python3 run.py
-```
-
-### IA
-
-And on your computer, go to the **Back-End/IA/** for run the model object detection:
-```
-cd IA/
-python3 -m pip install -r requirements.txt
-./worker.py
 ```
 
 ### Front-End / Mobile App
