@@ -4,8 +4,14 @@ Koic
 
 ## Desciption
 
-Koic is a **connected scarecrow** who is equipped with cameras that film the terrain in real time.  
+Koic is a **connected scarecrow** which is equipped with cameras that film the terrain in real time.  
 The filmed images are then analysed. Depending on the animal that is hit, the scarecrow will choose a suitable way **to repel it in a natural way.**
+
+<p align="center">
+  <img src=".github/dimages/../images/Koic-stream.png" width="25%" />
+  <img src=".github/demo.gif" width="30%" /> 
+  <img src=".github/dimages/../images/Koic-activity.png" width="25%" /> 
+</p>
 
 ## Summary
 - [Desciption](#desciption)
@@ -95,6 +101,10 @@ ssh pi@<ip_address_raspberry_pi>
 ## Detailed launch
 ### Back-End / Consumer Kafka
 
+:warning: Change variable `REPLACE_BY_YOUR_IP` by your computer address ip in:
+- **koic-app/.env**
+- **RPIProducer/manager.py**
+
 ```
 ./launch.sh
 ```
@@ -117,7 +127,7 @@ If you would test without pi run his command:
 ./RPIProducer/tests/fake_producer.py
 ```
 
-Run the kafka producer on raspberry pi:
+Run the kafka producer on raspberry pi:  
 Put the script on raspberry pi with this command:  
 ```bash
 ./rpi.sh {ip_of_your_raspi}
@@ -125,7 +135,7 @@ Put the script on raspberry pi with this command:
 
 The programm was copied in `Dowloads` folder
 ```bash
-# Kafka Producer
+# Kafka Producer / on rasberry pi
 python3 run.py
 ```
 
