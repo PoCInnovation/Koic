@@ -4,8 +4,14 @@ Koic
 
 ## Desciption
 
-Koic is a **connected scarecrow** who is equipped with cameras that film the terrain in real time.  
+Koic is a **connected scarecrow** which is equipped with cameras that film the terrain in real time.  
 The filmed images are then analysed. Depending on the animal that is hit, the scarecrow will choose a suitable way **to repel it in a natural way.**
+
+<p align="center">
+  <img src=".github/dimages/../images/Koic-stream.png" width="25%" />
+  <img src=".github/demo.gif" width="30%" /> 
+  <img src=".github/dimages/../images/Koic-activity.png" width="25%" /> 
+</p>
 
 ## Summary
 - [Desciption](#desciption)
@@ -19,12 +25,10 @@ The filmed images are then analysed. Depending on the animal that is hit, the sc
       - [Using the desktop](#using-the-desktop)
       - [Using the command line](#using-the-command-line)
     - [Controlling the pi remotely](#controlling-the-pi-remotely)
-  - [:eye_speech_bubble: Kafka manager](#eye_speech_bubble-kafka-manager)
 - [Quick Start](#quick-start)
 - [Detailed launch](#detailed-launch)
   - [Back-End / Consumer Kafka](#back-end--consumer-kafka)
   - [Producer Kafka](#producer-kafka)
-  - [IA](#ia)
   - [Front-End / Mobile App](#front-end--mobile-app)
 - [Features](#features)
   - [Application](#application)
@@ -47,7 +51,6 @@ git clone git@github.com:PoCInnovation/Koic.git
 - [Yarn](https://classic.yarnpkg.com/en/docs/install/#debian-stable)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker-compose](https://docs.docker.com/compose/install/)
-- [Java 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
 - Have a Raspberry Pi and its camera module (PiCamera)
 
 ### :iphone: The Expo Client App
@@ -88,140 +91,52 @@ Once you have the address, establish the **ssh connection** with your raspberry 
 ssh pi@<ip_address_raspberry_pi>
 ```
 
-### :eye_speech_bubble: Kafka manager
-
-:warning:
-Install [CMAK](https://github.com/yahoo/CMAK).
-Follow this tutorial [Install Kafka manager | Kafka for beginners](https://youtu.be/AlQfpG10vAc?list=PLxoOrmZMsAWxXBF8h_TPqYJNsh3x4GyO4&t=127)  
-
-
 ## Quick Start
 
-1. `./script` for change put ip address in all file  
-   Or Change `Ip Address` (ip of your computer) in:
-   -  **Back-End/docker-compose.yml**
-   -  **Back-End/API/routes/stream.py**
-   -  **RPIProducer/manager.py**
-   -  **koic-app/.env**
-2. Run docker-compose in Back-End/
-3. Create table in database
-4. Create Kafka Cluster
-5. Run Kafka Producer (raspberry pi or on your computer)
-6. Run IA (Yolov5)
-7. Run Mobile-App
-
+1. Run launch programm `./launch.sh`
+2. Create Kafka Cluster on http://localhost:9000/addCluster
+3. Run Kafka Producer (raspberry pi or on your computer)
+5. Run Mobile-App
 
 ## Detailed launch
 ### Back-End / Consumer Kafka
-Now you know your **ip address**, in **Back-End/docker-compose.yml** change the variable environnement `KAFKA_ADVERTISED_HOST_NAME` by your ip address like this:
-<details>
-    <summary>📄 Back-End/docker-compose.yml:</summary>
 
-```yml
-# Back-End/docker-compose.yml
-  kafka:
-    container_name: kafka
-    image: wurstmeister/kafka:latest
-    ports:
-      - 9092:9092
-    environment:
-      - "JMX_PORT=8004"
-      - "KAFKA_ADVERTISED_HOST_NAME={ip address}" #<-- Change here
-      - "KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181"
-    depends_on:
-      - zookeeper
+:warning: Change variable `REPLACE_BY_YOUR_IP` by your computer address ip in:
+- **koic-app/.env**
+- **RPIProducer/manager.py**
+
 ```
-</details>
-
-And in **Back-End/API/routes/stream.py**:
-
-<details>
-    <summary>📄 Back-End/API/routes/stream.py:</summary>
-
-```py
-# Back-End/API/routes/stream.py
-from kafka import KafkaConsumer
-from flask import Blueprint, Response
-
-stream = Blueprint('/stream', __name__)
-
-def get_video_stream(id):
-    consumer = KafkaConsumer(f"CAMERA_{int(id)}", bootstrap_servers=["{ip address}:9092"]) #<-- Change here
-
-    for msg in consumer:
-        yield(
-            b'--frame\r\n'
-            b'Content-Type: image/jpg\r\n\r\n' + msg.value + b'\r\n\r\n'
-        )
+./launch.sh
 ```
+
+Create kafka cluster on your http://localhost:9000/addCluster
+<details>
+    <summary>Like this:</summary>
+
+![](.github/images/kafka_manager.png)
 
 </details>
+And save.  
 
-On your computer, and at the `root` of this repo run these commands
-
-```bash
-cd Back-End/
-docker-compose up -d
-```
-When ```db``` services are up please create the table with:
-
-```bash
-python3 -m pip install psycopg2-binary
-python3 API/migrations/setup.py
-```
-:warning:
-Now create a `kafka cluster` with [CMAK](https://github.com/yahoo/CMAK).
-```bash
-bin/cmak -Dconfig.file=conf/application.conf -Dhttp.port=8080
-```
-> If you have "KeeperErrorCode = Unimplemented for /kafka-manager/mutex" follow this [issue](https://github.com/yahoo/CMAK/issues/731#issuecomment-643880544)
 
 ### Producer Kafka
 
 Check that the above steps have been carried out.  
-If you would test without pi run his command in **RPIProducer/tests**:
+If you would test without pi run his command:
 ```bash
-python3 fake_producer.py
+./RPIProducer/tests/fake_producer.py
 ```
 
-Run the kafka producer on raspberry pi:
-
-before changing the ip address in **RPIProducer/manager.py** as done in the previous step
-
-<details>
-    <summary>📄 RPIProducer/manager.py:</summary>
-
-
-```py
-# RPIProducer/manager.py
-import io
-import time
-from picamera import PiCamera
-from kafka import KafkaProducer
-
-class Manager:
-
-    def __init__(self):
-        self.producer = KafkaProducer(
-            bootstrap_servers="{ip address}:9092" #<-- Change here
-        )
-        self.camera = PiCamera()
-```
-
-</details>
-
+Run the kafka producer on raspberry pi:  
+Put the script on raspberry pi with this command:  
 ```bash
-# Kafka Producer
-python3 RPIProducer/run.py
+./rpi.sh {ip_of_your_raspi}
 ```
 
-### IA
-
-And on your computer, go to the **Back-End/IA/** for run the model object detection:
-```
-cd IA/
-python3 -m pip install -r requirements.txt
-./worker.py
+The programm was copied in `Dowloads` folder
+```bash
+# Kafka Producer / on rasberry pi
+python3 run.py
 ```
 
 ### Front-End / Mobile App

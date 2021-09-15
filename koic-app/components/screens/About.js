@@ -15,6 +15,7 @@ function Infos() {
             <Text style={styles.Title}>Contact us</Text>
             <Text style={styles.Text}>ines.maaroufi@epitech.eu</Text>
             <Text style={styles.Text}>thomas.michel@epitech.eu</Text>
+            <Text style={styles.Text}>coline.seguret@epitech.eu</Text>
             <Text style={styles.Text}>contact@poc-innovation.fr</Text>
         </View>
     )

@@ -8,7 +8,7 @@ from flasgger import Swagger
 from dotenv import load_dotenv
 load_dotenv()
 
-IP = os.getenv('IP', '127.0.0.1')
+RUN_IP = os.getenv('RUN_IP', '127.0.0.1')
 
 def init_config(app):
     env_config = os.getenv("APP_SETTINGS", "config.DevelopmentConfig")
@@ -41,7 +41,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     port = args.port
-    app.run(host=IP, port=port)
+    app.run(host=RUN_IP, port=port)
 
 
 # AUTHENTICATION: Bearer Token

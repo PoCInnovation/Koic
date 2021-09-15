@@ -1,25 +1,18 @@
 #!/usr/bin/env bash
 
-FILES=("Back-End/docker-compose.yml"
-       "Back-End/API/routes/stream.py"
-       "RPIProducer/manager.py"
-       "koic-app/.env")
-
-REPLACE=`hostname -I | cut -d' ' -f1`
-FIND='REPLACE_BY_YOUR_IP'
+LOCAL_IP=`hostname -I | cut -d' ' -f1`
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
-printf "${GREEN}Your IP is${NC} ${REPLACE}\n"
 
-for Item in ${FILES[*]} ;
-  do
-    sed -i "s/$FIND/$REPLACE/" "$Item"
-  done
 
-printf "${GREEN}[ DONE ]${NC} Replace Ip in files\n"
+printf "${GREEN}Your IP is${NC} ${LOCAL_IP}\n"
+
+export IP=${LOCAL_IP}
+
+printf "${GREEN}[ DONE ]${NC} export IP\n"
 
 docker-compose --file Back-End/docker-compose.yml up --build -d
 
@@ -38,6 +31,8 @@ if ./Back-End/API/migrations/setup.py &> /dev/null; then
 else
   printf "${RED}[ CRASH ]${NC} Create table in DB\n"  
 fi
+
+python3 -mwebbrowser http://localhost:9000/addCluster
 
 printf "\n${YELLOW}NEXT STEP${NC}\n"
 printf "1. Create kafka cluster\n"
