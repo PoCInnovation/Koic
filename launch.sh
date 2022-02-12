@@ -26,7 +26,7 @@ fi
 
 sleep 2
 
-if ./Back-End/API/migrations/setup.py &> /dev/null; then
+if docker-compose --file Back-End/docker-compose.yml run api migrations/setup.py  &> /dev/null; then
   printf "${GREEN}[ DONE ]${NC} Create table in DB\n"
 else
   printf "${RED}[ CRASH ]${NC} Create table in DB\n"  

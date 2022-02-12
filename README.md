@@ -124,6 +124,7 @@ And save.
 Check that the above steps have been carried out.  
 If you would test without pi run his command:
 ```bash
+python3 -m pip install -r ./RPIProducer/requirements.txt
 ./RPIProducer/tests/fake_producer.py
 ```
 
