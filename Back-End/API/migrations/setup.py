@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import enum
 import uuid
 import sqlalchemy
@@ -9,7 +10,10 @@ from sqlalchemy import Column, DateTime, Enum
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
 
-engine = create_engine('postgresql://root:password@localhost:5432/koic_detections', echo = True)
+engine = create_engine(
+    os.getenv("DATABASE_URI", "postgresql://root:password@localhost:5432/koic_detections"),
+    echo = True
+)
 Base = declarative_base()
 
 class Animals(enum.Enum):
